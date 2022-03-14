@@ -9,6 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <name>musOK-db-browser</name>
 
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.1</junit.version>
@@ -46,6 +47,11 @@
                     <artifactId>*</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.konghq</groupId>
+            <artifactId>unirest-java</artifactId>
+            <version>3.13.6</version>
         </dependency>
         <dependency>
             <groupId>net.synedra</groupId>
