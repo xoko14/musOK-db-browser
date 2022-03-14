@@ -10,6 +10,7 @@ module com.musok.musokdbbrowser {
     requires org.kordamp.ikonli.javafx;
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
+    requires java.sql;
 
     opens com.musok.musokdbbrowser to javafx.fxml;
     exports com.musok.musokdbbrowser;
