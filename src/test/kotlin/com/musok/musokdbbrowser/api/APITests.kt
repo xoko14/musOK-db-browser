@@ -1,15 +1,62 @@
 package com.musok.musokdbbrowser.api
 
 import com.musok.musokdbbrowser.api.connection.Server
-import com.musok.musokdbbrowser.session.Session
+import com.musok.musokdbbrowser.api.mappings.song.FavStatus
 import org.junit.jupiter.api.Test
 
 class APITests {
     @Test
     fun loginAndGetCurrentUser(){
-        Session.token = Server.logIn("creator", "test1234")
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
         val user = Server.getCurrentUser()
         println(user.username)
         assert(user.username == "creator")
+    }
+
+    @Test
+    fun getAllUsers(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val users = Server.getAllUsers()
+        println(users.size)
+        assert(true)
+    }
+
+    @Test
+    fun getUserTestuser(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val user = Server.getUser("1")
+        assert(user.username == "testuser")
+    }
+
+    @Test
+    fun getAllSongs(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val songs = Server.getAllSongs()
+        println(songs.size)
+        assert(true)
+    }
+
+    @Test
+    fun getSongBrainPower(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val song = Server.getSong("1")
+        assert(song.songName == "Brain Power")
+    }
+
+    @Test
+    fun favAndUnfavTest(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+
+        val favedStatus = Server.favSong("1")
+        assert(favedStatus.status == FavStatus.FAVED && favedStatus.song.songName == "Brain Power")
+
+        val unfavedStatus = Server.unfavSong("1")
+        assert(unfavedStatus.status == FavStatus.UNFAVED && unfavedStatus.song.songName == "Brain Power")
     }
 }
