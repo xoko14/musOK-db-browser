@@ -12,7 +12,11 @@ module com.musok.musokdbbrowser {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires unirest.java;
+    requires gson;
 
     opens com.musok.musokdbbrowser to javafx.fxml;
+    opens com.musok.musokdbbrowser.api.mappings.auth to gson;
+    opens com.musok.musokdbbrowser.api.mappings.user to gson;
+    opens com.musok.musokdbbrowser.api.mappings.song to gson;
     exports com.musok.musokdbbrowser;
 }
