@@ -45,6 +45,7 @@ class APITests {
         Server.url = "http://unnamed-chart-server.com:8000"
         Server.logIn("creator", "test1234")
         val song = Server.getSong("1")
+        println(song.artURL)
         assert(song.songName == "Brain Power")
     }
 
@@ -58,5 +59,23 @@ class APITests {
 
         val unfavedStatus = Server.unfavSong("1")
         assert(unfavedStatus.status == FavStatus.UNFAVED && unfavedStatus.song.songName == "Brain Power")
+    }
+
+    @Test
+    fun getCurrentUserFavs(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val songs = Server.getCurrentUserFavs()
+        println(songs.size)
+        assert(true)
+    }
+
+    @Test
+    fun getTestUserFavs(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        Server.logIn("creator", "test1234")
+        val songs = Server.getUserFavs("1")
+        println(songs.size)
+        assert(true)
     }
 }

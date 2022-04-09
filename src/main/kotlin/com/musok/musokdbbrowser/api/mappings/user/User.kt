@@ -5,7 +5,5 @@ import com.musok.musokdbbrowser.api.mappings.song.Song
 
 data class User(
     val username: String,
-    val id: Long,
-    @SerializedName("songs_uploaded")
-    val songsUploaded: List<Song>
+    val id: Long
 )

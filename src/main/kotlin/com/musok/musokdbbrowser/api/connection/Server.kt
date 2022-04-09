@@ -53,8 +53,16 @@ object Server {
         return Gson().fromJson(response, User::class.java)
     }
 
-    fun getCurrentUserFavs(): List<Song>{
-        TODO()
+    fun getCurrentUserFavs(skip: String = "0", limit: String = "100"): List<Song>{
+        val response = Unirest.get("$url/users/me/favs")
+            .header("Authorization", token.getHeaderValue())
+            .header("accept", "application/json")
+            .queryString("skip", skip)
+            .queryString("limit", limit)
+            .asJson()
+            .body.toString()
+        val itemType = object: TypeToken<List<Song>>() {}.type
+        return Gson().fromJson(response, itemType)
     }
 
     fun getUser(id: String): User{
@@ -65,8 +73,16 @@ object Server {
         return Gson().fromJson(response, User::class.java)
     }
 
-    fun getUserFavs(): List<Song>{
-        TODO()
+    fun getUserFavs(id: String, skip: String = "0", limit: String = "100"): List<Song>{
+        val response = Unirest.get("$url/users/$id/favs")
+            .header("Authorization", token.getHeaderValue())
+            .header("accept", "application/json")
+            .queryString("skip", skip)
+            .queryString("limit", limit)
+            .asJson()
+            .body.toString()
+        val itemType = object: TypeToken<List<Song>>() {}.type
+        return Gson().fromJson(response, itemType)
     }
     //</editor-fold>
 
