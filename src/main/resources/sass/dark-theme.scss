@@ -1,0 +1,61 @@
+@font-face {
+  src: url("OpenSans-VariableFont_wdth,wght.ttf");
+}
+
+$background-color: #2d2d2d;
+$button-color: #4f4f4f;
+$text-color: #f7fafa;
+$blue-highlight: #a4ffff;
+$button-hover: #6a6a6a;
+$pressed-border-color: #8d57fc;
+$button-border-color: #289de8;
+$textfield-color: #40596c;
+$textfield-border-color: #289de8;
+
+.root {
+  -fx-background: $background-color;
+}
+
+.button, .buttonUp, .buttonStop, .buttonSelect {
+  -fx-background-color: $button-color;
+  -fx-border-color: $button-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-text-fill: #f7fafa;
+  -fx-effect: none;
+}
+
+.button:hover, .buttonStop:hover, .buttonUp:hover, .choice-box:hover, .button:focused:hover, .buttonStop:focused:hover, .buttonUp:focused:hover, .buttonSelect:focused:hover, .choice-box:focused:hover {
+  -fx-background-color: $button-color;
+  -fx-border-color: $blue-highlight;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-text-fill: $text-color;
+}
+
+.button:focused, .buttonStop:focused, .buttonUp:focused, .buttonSelect:focused, .choice-box:focused {
+  -fx-background-color: $button-hover;
+  -fx-border-color: $button-hover;
+}
+
+.button:pressed, .button:pressed:hover{
+  -fx-background-color: $button-color;
+  -fx-border-color: $pressed-border-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-text-fill: $text-color;
+}
+
+.text-field {
+  -fx-background-color: $background-color;
+  -fx-border-color: $textfield-border-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-text-fill: white;
+}
+
+.text-field:focused {
+  -fx-border-color: $pressed-border-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+}
