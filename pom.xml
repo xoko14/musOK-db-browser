@@ -278,8 +278,8 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <inputPath>${basedir}/src/main/resources/sass/</inputPath>
-                    <outputPath>${basedir}/target/classes/theme/</outputPath>
+                    <inputPath>${basedir}/src/main/scss/</inputPath>
+                    <outputPath>${basedir}/target/classes/</outputPath>
                 </configuration>
             </plugin>
 
