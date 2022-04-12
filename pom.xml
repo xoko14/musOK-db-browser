@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <junit.version>5.8.1</junit.version>
         <kotlin.version>1.6.10</kotlin.version>
-        <main.class>com.musok.musokdbbrowser.HelloApplicationKt</main.class>
+        <main.class>com.musok.musokdbbrowser.MainKt</main.class>
     </properties>
 
     <dependencies>

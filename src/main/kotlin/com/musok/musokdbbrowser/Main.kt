@@ -5,17 +5,18 @@ import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
 import javafx.stage.Stage
 
-class HelloApplication : Application() {
+class MainApp: Application(){
     override fun start(stage: Stage) {
-        val fxmlLoader = FXMLLoader(this::class.java.getResource("/views/hello-view.fxml"))
+        val fxmlLoader = FXMLLoader(this::class.java.getResource("/views/main-view.fxml"))
         val scene = Scene(fxmlLoader.load())
         scene.stylesheets.add("/theme/dark-theme.css")
-        stage.title = "Log In"
+        stage.title = "MusOK Browser"
         stage.scene = scene
         stage.show()
     }
+
 }
 
 fun main() {
-    Application.launch(HelloApplication::class.java)
+    Application.launch(MainApp::class.java)
 }
