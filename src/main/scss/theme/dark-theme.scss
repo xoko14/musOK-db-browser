@@ -7,10 +7,9 @@ $button-color: #4f4f4f;
 $text-color: #f7fafa;
 $blue-highlight: #a4ffff;
 $button-hover: #6a6a6a;
-$pressed-border-color: #8d57fc;
-$button-border-color: #289de8;
+$pressed-border-color: #289de8;
+$button-border-color: #8d57fc;
 $textfield-color: #40596c;
-$textfield-border-color: #289de8;
 
 .root {
   -fx-background: $background-color;
@@ -48,7 +47,7 @@ $textfield-border-color: #289de8;
 
 .text-field {
   -fx-background-color: $background-color;
-  -fx-border-color: $textfield-border-color;
+  -fx-border-color: $button-border-color;
   -fx-border-radius: 3;
   -fx-border-width: 2;
   -fx-text-fill: white;
@@ -58,4 +57,49 @@ $textfield-border-color: #289de8;
   -fx-border-color: $pressed-border-color;
   -fx-border-radius: 3;
   -fx-border-width: 2;
+}
+
+.tab-pane .tab SVGPath{
+  -fx-fill: #f7fafa;
+}
+.tab-pane .tab:selected SVGPath, .tab-pane .tab:selected:hover SVGPath{
+  -fx-fill: #08f3ff;
+}
+.tab-pane .tab:hover SVGPath{
+  -fx-fill: #7effff;
+}
+.tab-pane .tab{
+  -fx-background-color: transparent;
+  -fx-focus-color: transparent;
+  -fx-faint-focus-color: transparent;
+  -fx-border-radius: 3;
+  -fx-border-width: 0 0 3 0;
+  -fx-border-color: transparent;
+  -fx-text-fill: $text-color;
+}
+
+.tab-pane .tab:selected{
+  -fx-background-color: transparent;
+  -fx-focus-color: transparent;
+  -fx-faint-focus-color: transparent;
+  -fx-border-radius: 3;
+  -fx-border-width: 0 0 3 0;
+  -fx-border-color: $button-border-color;
+}
+
+.tab-pane > .tab-header-area {
+  -fx-background-insets: 0.0;
+  -fx-padding: 5 5 5 5;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background
+{
+  -fx-background-color: $background-color //linear-gradient(to right, #2d2d2d 0%, #343434 7.5%, #343434 100%); //#424242; //
+}
+.tab-pane > .tab-header-area > .headers-region > .tab {
+  -fx-padding: 10;
+}
+
+.tab-label{
+  -fx-text-fill: $text-color;
 }
