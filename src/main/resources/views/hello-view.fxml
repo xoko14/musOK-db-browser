@@ -4,30 +4,37 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
 
-<VBox prefHeight="295.0" prefWidth="274.0" spacing="20.0" stylesheets="@../theme/dark-theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
-   <children>
-      <Label text="Log In">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <VBox prefHeight="200.0" prefWidth="100.0">
-         <children>
-            <Label text="Server URL" />
-            <TextField fx:id="tfURL" />
-            <Label text="User" />
-            <TextField fx:id="tfUser" />
-            <Label text="Password" />
-            <PasswordField fx:id="pfPassword" />
-         </children>
-      </VBox>
-      <Button mnemonicParsing="false" onAction="#onConnectAction" text="Connect" />
-   </children>
-</VBox>
+<TabPane prefHeight="270.0" prefWidth="250.0" stylesheets="@../../../../target/classes/theme/dark-theme.css" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="115.0" tabMinWidth="87.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.HelloController">
+   <tabs>
+      <Tab styleClass="tab-fullsize" text="Login">
+         <content>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Server URL" />
+                  <TextField fx:id="tfURL" />
+                  <Label text="User" />
+                  <TextField fx:id="tfUser" />
+                  <Label text="Password" />
+                  <PasswordField fx:id="pfPassword" />
+                  <Button mnemonicParsing="false" onAction="#onConnectAction" text="Connect">
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></Button>
+               </children>
+               <padding>
+                  <Insets top="10.0" />
+               </padding>
+            </VBox>
+         </content>
+      </Tab>
+      <Tab styleClass="tab-fullsize" text="Sign Up" />
+   </tabs>
+   <padding>
+      <Insets left="10.0" right="10.0" />
+   </padding>
+</TabPane>

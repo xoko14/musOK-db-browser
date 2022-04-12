@@ -83,9 +83,16 @@ $textfield-color: #40596c;
   -fx-focus-color: transparent;
   -fx-faint-focus-color: transparent;
   -fx-border-radius: 3;
-  -fx-border-width: 0 0 3 0;
   -fx-border-color: $button-border-color;
+
+  .tab:left{
+    -fx-border-width: 0 0 3 0;
+  }
+  .tab:top{
+    -fx-border-width: 0 3 0 0;
+  }
 }
+
 
 .tab-pane > .tab-header-area {
   -fx-background-insets: 0.0;

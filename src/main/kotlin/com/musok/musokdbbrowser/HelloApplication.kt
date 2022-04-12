@@ -9,6 +9,7 @@ class HelloApplication : Application() {
     override fun start(stage: Stage) {
         val fxmlLoader = FXMLLoader(this::class.java.getResource("/views/hello-view.fxml"))
         val scene = Scene(fxmlLoader.load())
+        scene.stylesheets.add("/theme/dark-theme.css")
         stage.title = "Log In"
         stage.scene = scene
         stage.show()
