@@ -49,7 +49,7 @@
                   <Label text="Password" />
                   <PasswordField fx:id="pfPassSu" />
                   <Label text="Repeat password" />
-                  <PasswordField fx:id="tfPassConfSu" />
+                  <PasswordField fx:id="pfPassConfSu" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <Button mnemonicParsing="false" onAction="#createAccount" text="Create account" BorderPane.alignment="CENTER" />

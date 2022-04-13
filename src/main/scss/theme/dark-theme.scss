@@ -2,6 +2,12 @@
   src: url("OpenSans-VariableFont_wdth,wght.ttf");
 }
 
+$mononokiNF: "mononoki Nerd Font";
+@font-face {
+  font-family: $mononokiNF;
+  src: url("mononokiNF.ttf")
+}
+
 $background-color: #2d2d2d;
 $button-color: #4f4f4f;
 $text-color: #f7fafa;
@@ -109,5 +115,15 @@ $textfield-color: #40596c;
 }
 
 .tab-label{
+  -fx-text-fill: $text-color;
+}
+
+.text-area{
+  -fx-background-color: transparent;
+  -fx-control-inner-background: $button-color;
+  -fx-font-family: $mononokiNF;
+  -fx-border-color: $button-border-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
   -fx-text-fill: $text-color;
 }

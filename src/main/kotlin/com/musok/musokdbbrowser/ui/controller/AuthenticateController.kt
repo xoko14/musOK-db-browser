@@ -7,6 +7,7 @@ import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
+import org.mindrot.jbcrypt.BCrypt
 
 
 class AuthenticateController {
@@ -37,7 +38,20 @@ class AuthenticateController {
 
     @FXML
     fun createAccount(){
-        println("create account")
+        if(pfPassSu.text.trim() == pfPassConfSu.text.trim()){
+            Server.url = tfURLsu.text.trim()
+            val user = Server.createUser(
+                    username = tfUserSu.text.trim(),
+                    hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
+            )
+            println("Account \"${user.username}\" succesfully created")
+        } else {
+            val alert = Alert(AlertType.INFORMATION)
+            alert.title = "HAHA"
+            alert.headerText = "u dun goofed"
+            alert.contentText = "somebody f'd up haha fnny"
+            alert.showAndWait()
+        }
     }
 
 

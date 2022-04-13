@@ -43,8 +43,17 @@ object Server {
         return Gson().fromJson(response, itemType)
     }
 
-    fun createUser(){
-        TODO()
+    fun createUser(username: String, hashedPwd: String): User{
+        val response = Unirest.post("$url/users/")
+                .header("accept", "application/json")
+                .header("Content-Type", "application/json")
+                .body("{\n" +
+                        "  \"username\": \"$username\",\n" +
+                        "  \"password\": \"$hashedPwd\"\n" +
+                        "}")
+                .asJson()
+                .body.toString()
+        return Gson().fromJson(response, User::class.java)
     }
 
     fun getCurrentUser(): User {
