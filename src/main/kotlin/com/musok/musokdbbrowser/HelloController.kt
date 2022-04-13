@@ -33,13 +33,8 @@ class HelloController {
             this::class.java.getResource("/theme/dark-theme.css")?.toExternalForm()
         )
 
-        val loader = FXMLLoader()
-        loader.location = this::class.java.getResource("/views/main-view.fxml")
-        val root: Parent = loader.load()
-        val stage = Stage()
-        stage.scene = Scene(root)
-        stage.title = "MusOK Browser"
-        stage.show()
+        val stage = tfURL.scene.window as Stage
+        stage.close()
     }
 
 

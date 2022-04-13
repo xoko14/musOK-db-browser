@@ -10,8 +10,11 @@ import kong.unirest.Unirest
 
 object Server {
     var url: String? = null
-    lateinit var token: Token
-        private set
+    private var token: Token? = null
+
+    fun isLoggedIn(): Boolean{
+        return token != null
+    }
 
     //<editor-fold desc="Auth">
     fun logIn(user: String, password: String) {
@@ -46,7 +49,7 @@ object Server {
 
     fun getCurrentUser(): User {
         val response = Unirest.get("$url/users/me")
-            .header("Authorization", token.getHeaderValue())
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
             .body.toString()
@@ -55,7 +58,7 @@ object Server {
 
     fun getCurrentUserFavs(skip: String = "0", limit: String = "100"): List<Song>{
         val response = Unirest.get("$url/users/me/favs")
-            .header("Authorization", token.getHeaderValue())
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .queryString("skip", skip)
             .queryString("limit", limit)
@@ -75,7 +78,7 @@ object Server {
 
     fun getUserFavs(id: String, skip: String = "0", limit: String = "100"): List<Song>{
         val response = Unirest.get("$url/users/$id/favs")
-            .header("Authorization", token.getHeaderValue())
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .queryString("skip", skip)
             .queryString("limit", limit)
@@ -115,7 +118,7 @@ object Server {
 
     fun favSong(id: String): SongStatus{
         val response = Unirest.put("$url/songs/$id/fav")
-            .header("Authorization", token.getHeaderValue())
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
             .body.toString()
@@ -124,7 +127,7 @@ object Server {
 
     fun unfavSong(id: String): SongStatus{
         val response = Unirest.put("$url/songs/$id/unfav")
-            .header("Authorization", token.getHeaderValue())
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
             .body.toString()
