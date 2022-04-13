@@ -8,12 +8,13 @@ import javafx.fxml.Initializable
 import javafx.scene.Parent
 import javafx.scene.Scene
 import javafx.scene.control.Label
+import javafx.scene.control.TextArea
 import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
 class UserController: Initializable {
-    @FXML private lateinit var usernamePlaceholder: Label
+    @FXML private lateinit var taUserInfo: TextArea
     private lateinit var user: User
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
 
@@ -34,6 +35,6 @@ class UserController: Initializable {
 
         println(user)
 
-        usernamePlaceholder.text = user.username
+        taUserInfo.text="$user\n${Server.getCurrentUserFavs()}"
     }
 }
