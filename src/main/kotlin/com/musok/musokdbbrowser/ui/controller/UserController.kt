@@ -12,17 +12,18 @@ import javafx.stage.Stage
 import java.net.URL
 import java.util.*
 
-class UserView: Initializable {
+class UserController: Initializable {
     @FXML private lateinit var usernamePlaceholder: Label
     private lateinit var user: User
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
 
         if(!Server.isLoggedIn()){
             val loader = FXMLLoader()
-            loader.location = this::class.java.getResource("/views/hello-view.fxml")
+            loader.location = this::class.java.getResource("/views/authenticate-view.fxml")
             val root: Parent = loader.load()
             val stage = Stage()
             stage.scene = Scene(root)
+            stage.scene.stylesheets.removeAll()
             stage.scene.stylesheets.add("/theme/dark-theme.css")
             stage.title = "Login"
             stage.showAndWait()

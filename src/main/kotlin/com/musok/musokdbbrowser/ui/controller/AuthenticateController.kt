@@ -1,10 +1,7 @@
-package com.musok.musokdbbrowser
+package com.musok.musokdbbrowser.ui.controller
 
 import com.musok.musokdbbrowser.api.connection.Server
 import javafx.fxml.FXML
-import javafx.fxml.FXMLLoader
-import javafx.scene.Parent
-import javafx.scene.Scene
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.PasswordField
@@ -12,13 +9,14 @@ import javafx.scene.control.TextField
 import javafx.stage.Stage
 
 
-class HelloController {
-    @FXML
-    private lateinit var tfURL: TextField
-    @FXML
-    private lateinit var tfUser: TextField
-    @FXML
-    private lateinit var pfPassword: PasswordField
+class AuthenticateController {
+    @FXML private lateinit var tfURL: TextField
+    @FXML private lateinit var tfURLsu: TextField
+    @FXML private lateinit var tfUser: TextField
+    @FXML private lateinit var tfUserSu: TextField
+    @FXML private lateinit var pfPassword: PasswordField
+    @FXML private lateinit var pfPassSu: PasswordField
+    @FXML private lateinit var pfPassConfSu: PasswordField
 
     @FXML
     fun onConnectAction(){
@@ -35,6 +33,11 @@ class HelloController {
 
         val stage = tfURL.scene.window as Stage
         stage.close()
+    }
+
+    @FXML
+    fun createAccount(){
+        println("create account")
     }
 
 
