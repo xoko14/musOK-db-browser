@@ -35,6 +35,6 @@ class UserController: Initializable {
 
         println(user)
 
-        taUserInfo.text="$user\n${Server.getCurrentUserFavs()}"
+        taUserInfo.text="$user\n${Server.getCurrentUserUploaded()}"
     }
 }
