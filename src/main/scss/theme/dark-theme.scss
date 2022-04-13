@@ -127,3 +127,7 @@ $textfield-color: #40596c;
   -fx-border-width: 2;
   -fx-text-fill: $text-color;
 }
+
+.alert-svg{
+  -fx-fill: $button-border-color;
+}
