@@ -7,6 +7,7 @@ import javafx.fxml.Initializable
 import javafx.scene.layout.FlowPane
 import java.net.URL
 import java.util.*
+import javax.sound.sampled.AudioSystem
 
 class BrowseController: Initializable {
     @FXML lateinit var rootPane: FlowPane
@@ -16,8 +17,8 @@ class BrowseController: Initializable {
         for (song in songs){
             val songCard = SongCard(song)
 
-            songCard.setOnMouseClicked {
-                println("Song selected: $song")
+            songCard.setOnDownload{
+                println("Downloading ${songCard.song.songName}...")
             }
 
             rootPane.children.add(songCard)

@@ -26,8 +26,12 @@ $textfield-color: #40596c;
   -fx-border-color: $button-color;
   -fx-border-radius: 3;
   -fx-border-width: 2;
-  -fx-text-fill: #f7fafa;
+  -fx-text-fill: $text-color;
   -fx-effect: none;
+
+  SVGPath{
+    -fx-fill: $text-color;
+  }
 }
 
 .button:hover, .buttonStop:hover, .buttonUp:hover, .choice-box:hover, .button:focused:hover, .buttonStop:focused:hover, .buttonUp:focused:hover, .buttonSelect:focused:hover, .choice-box:focused:hover {
@@ -49,6 +53,11 @@ $textfield-color: #40596c;
   -fx-border-radius: 3;
   -fx-border-width: 2;
   -fx-text-fill: $text-color;
+
+  SVGPath{
+    -fx-fill: $pressed-border-color;
+  }
+
 }
 
 .text-field {
@@ -66,7 +75,7 @@ $textfield-color: #40596c;
 }
 
 .tab-pane .tab SVGPath{
-  -fx-fill: #f7fafa;
+  -fx-fill: $text-color;
 }
 .tab-pane .tab:selected SVGPath, .tab-pane .tab:selected:hover SVGPath{
   -fx-fill: $button-border-color;
@@ -134,7 +143,6 @@ $textfield-color: #40596c;
 
 .song-card{
   -fx-background-color: $button-color;
-  -fx-background-radius: 3;
 }
 
 .scroll-bar:horizontal .track,
@@ -190,4 +198,29 @@ $textfield-color: #40596c;
   -fx-background-color: $button-hover;
   -fx-background-insets: 0 4 0 4;
   -fx-background-radius : 5;
+}
+
+.song-info-main > HBox > Label {
+  -fx-font-size: 1.5em;
+}
+
+.info-diff-card{
+  -fx-font-size: 1.2em;
+  -fx-background-radius: 3;
+}
+
+.info-diff-card-easy{
+  -fx-background-color: #2e7d32;
+}
+
+.info-diff-card-normal{
+  -fx-background-color: #ff8f00;
+}
+
+.info-diff-card-hard{
+  -fx-background-color: #ad1457;
+}
+
+.info-diff-card-title{
+  -fx-font-size: 1.5em;
 }

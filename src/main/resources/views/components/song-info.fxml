@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<fx:root minWidth="600.0" stylesheets="@../../../../../target/classes/theme/dark-theme.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox>
+         <children>
+            <ImageView fx:id="imgArt" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <VBox styleClass="song-info-main">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Song: " />
+                        <Label fx:id="lbSongName" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Author: " />
+                        <Label fx:id="lbSongAuthor" text="Label" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <children>
+                        <Label text="Artwork: " />
+                        <Label fx:id="lbArtworkAuthor" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+               <HBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <FlowPane>
+         <children>
+            <VBox>
+               <children>
+                  <Label fx:id="lbDiffEasy" styleClass="info-diff-card-title" text="DIFF_EASY" />
+                  <HBox>
+                     <children>
+                        <Label text=" Charter: " />
+                        <Label fx:id="lbEasyCharter" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <styleClass>
+                  <String fx:value="info-diff-card" />
+                  <String fx:value="info-diff-card-easy" />
+               </styleClass>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label fx:id="lbDiffNormal" styleClass="info-diff-card-title" text="DIFF_NORMAL" />
+                  <HBox>
+                     <children>
+                        <Label text=" Charter: " />
+                        <Label fx:id="lbNormalCharter" text="Label" />
+                     </children>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </FlowPane.margin>
+               <styleClass>
+                  <String fx:value="info-diff-card" />
+                  <String fx:value="info-diff-card-normal" />
+               </styleClass>
+            </VBox>
+            <VBox>
+               <children>
+                  <Label fx:id="lbDiffHard" styleClass="info-diff-card-title" text="DIFF_HARD" />
+                  <HBox>
+                     <children>
+                        <Label text=" Charter: " />
+                        <Label fx:id="lbHardCharter" text="Label" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+               <FlowPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </FlowPane.margin>
+               <styleClass>
+                  <String fx:value="info-diff-card" />
+                  <String fx:value="info-diff-card-hard" />
+               </styleClass>
+            </VBox>
+         </children>
+      </FlowPane>
+   </children>
+</fx:root>
