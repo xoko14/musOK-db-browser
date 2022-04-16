@@ -21,19 +21,19 @@
                <children>
                   <HBox>
                      <children>
-                        <Label text="Song: " />
+                        <Label text="%song" />
                         <Label fx:id="lbSongName" text="Label" />
                      </children>
                   </HBox>
                   <HBox>
                      <children>
-                        <Label text="Author: " />
+                        <Label text="%author" />
                         <Label fx:id="lbSongAuthor" text="Label" />
                      </children>
                   </HBox>
                   <HBox>
                      <children>
-                        <Label text="Artwork: " />
+                        <Label text="%artwork" />
                         <Label fx:id="lbArtworkAuthor" text="Label" />
                      </children>
                   </HBox>
@@ -51,7 +51,7 @@
                   <Label fx:id="lbDiffEasy" styleClass="info-diff-card-title" text="DIFF_EASY" />
                   <HBox>
                      <children>
-                        <Label text=" Charter: " />
+                        <Label text="%charter" />
                         <Label fx:id="lbEasyCharter" text="Label" />
                      </children>
                   </HBox>
@@ -72,7 +72,7 @@
                   <Label fx:id="lbDiffNormal" styleClass="info-diff-card-title" text="DIFF_NORMAL" />
                   <HBox>
                      <children>
-                        <Label text=" Charter: " />
+                        <Label text="%charter" />
                         <Label fx:id="lbNormalCharter" text="Label" />
                      </children>
                   </HBox>
@@ -93,7 +93,7 @@
                   <Label fx:id="lbDiffHard" styleClass="info-diff-card-title" text="DIFF_HARD" />
                   <HBox>
                      <children>
-                        <Label text=" Charter: " />
+                        <Label text="%charter" />
                         <Label fx:id="lbHardCharter" text="Label" />
                      </children>
                      <VBox.margin>

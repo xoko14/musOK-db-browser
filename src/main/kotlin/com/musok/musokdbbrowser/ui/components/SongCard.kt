@@ -7,11 +7,15 @@ import javafx.event.EventHandler
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
+import javafx.scene.SnapshotParameters
 import javafx.scene.control.Button
 import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
+import javafx.scene.image.WritableImage
 import javafx.scene.layout.VBox
+import javafx.scene.paint.Color
+import javafx.scene.shape.Rectangle
 import javafx.scene.shape.SVGPath
 import javafx.stage.Stage
 import java.io.IOException
@@ -44,6 +48,19 @@ class SongCard(val song: Song): VBox() {
         }
 
         img.image = Image(song.artURL)
+        val imgClip = Rectangle(
+            img.fitWidth, img.fitHeight
+        )
+        imgClip.arcWidth = 3.0
+        imgClip.arcHeight = 3.0
+        img.clip = imgClip
+        val parameters = SnapshotParameters()
+        parameters.fill = Color.TRANSPARENT
+        val image: WritableImage = img.snapshot(parameters, null)
+        img.clip = null
+        img.image = image
+
+
         lbName.text = song.songName
         lbAuthor.text = song.author
 

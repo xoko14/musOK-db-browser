@@ -21,6 +21,7 @@ class UserController: Initializable {
         if(!Server.isLoggedIn()){
             val loader = FXMLLoader()
             loader.location = this::class.java.getResource("/views/authenticate-view.fxml")
+            loader.resources = ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
             val root: Parent = loader.load()
             val stage = Stage()
             stage.scene = Scene(root)

@@ -10,17 +10,17 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane prefHeight="305.0" prefWidth="250.0" stylesheets="@../../../../target/classes/theme/dark-theme.css" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="115.0" tabMinWidth="87.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.ui.controller.AuthenticateController">
+<TabPane prefHeight="305.0" prefWidth="250.0" stylesheets="@../../../../target/classes/theme/dark-theme.css" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="115.0" tabMinWidth="87.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.ui.controller.AuthenticateController">
    <tabs>
-      <Tab styleClass="tab-fullsize" text="Login">
+      <Tab styleClass="tab-fullsize" text="%login">
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Server URL" />
+                  <Label text="%serverUrl" />
                   <TextField fx:id="tfURL" />
-                  <Label text="User" />
+                  <Label text="%username" />
                   <TextField fx:id="tfUser" />
-                  <Label text="Password" />
+                  <Label text="%password" />
                   <PasswordField fx:id="pfPassword" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
@@ -34,21 +34,21 @@
             </VBox>
          </content>
       </Tab>
-      <Tab styleClass="tab-fullsize" text="Sign Up">
+      <Tab styleClass="tab-fullsize" text="%signUp">
          <content>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Server URL">
+                  <Label text="%serverUrl">
                      <VBox.margin>
                         <Insets top="10.0" />
                      </VBox.margin>
                   </Label>
                   <TextField fx:id="tfURLsu" />
-                  <Label text="Username" />
+                  <Label text="%username" />
                   <TextField fx:id="tfUserSu" />
-                  <Label text="Password" />
+                  <Label text="%password" />
                   <PasswordField fx:id="pfPassSu" />
-                  <Label text="Repeat password" />
+                  <Label text="%repeatPass" />
                   <PasswordField fx:id="pfPassConfSu" />
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
