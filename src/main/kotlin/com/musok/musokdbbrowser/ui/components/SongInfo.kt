@@ -42,8 +42,8 @@ class SongInfo(val song: Song): VBox(){
         val imgClip = Rectangle(
             imgArt.fitWidth, imgArt.fitHeight
         )
-        imgClip.arcWidth = 3.0
-        imgClip.arcHeight = 3.0
+        imgClip.arcWidth = 6.0
+        imgClip.arcHeight = 6.0
         imgArt.clip = imgClip
         val parameters = SnapshotParameters()
         parameters.fill = Color.TRANSPARENT
