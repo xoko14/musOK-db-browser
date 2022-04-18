@@ -3,6 +3,7 @@ package com.musok.musokdbbrowser.ui.controller
 import com.musok.musokdbbrowser.api.connection.Server
 import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
+import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -52,11 +53,20 @@ class AuthenticateController {
     fun createAccount(){
         if(pfPassSu.text.trim() == pfPassConfSu.text.trim()){
             Server.url = tfURLsu.text.trim()
-            val user = Server.createUser(
-                    username = tfUserSu.text.trim(),
-                    hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
-            )
-            println("Account \"${user.username}\" succesfully created")
+            try {
+                val user = Server.createUser(
+                        username = tfUserSu.text.trim(),
+                        hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
+                )
+                println("Account \"${user.username}\" succesfully created")
+            }
+            catch(e: UserAlreadyRegisteredException){
+                println("user already registered")
+            }
+            catch (e: UnknownException){
+                println("something went wrong")
+            }
+
         } else {
             val alert = Alert(AlertType.INFORMATION)
             alert.title = "HAHA"

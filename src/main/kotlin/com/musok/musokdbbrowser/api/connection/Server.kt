@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
+import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.api.mappings.auth.Token
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.api.mappings.song.SongStatus
@@ -57,8 +58,12 @@ object Server {
                         "  \"password\": \"$hashedPwd\"\n" +
                         "}")
                 .asJson()
-                .body.toString()
-        return Gson().fromJson(response, User::class.java)
+
+        when(response.status){
+            200 -> return Gson().fromJson(response.body.toString(), User::class.java)
+            400 -> throw UserAlreadyRegisteredException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getCurrentUser(): User {
