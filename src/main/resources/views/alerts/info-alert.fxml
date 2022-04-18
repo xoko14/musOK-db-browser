@@ -8,7 +8,6 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" stylesheets="@../../../../../target/classes/theme/dark-theme.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="190.0" prefWidth="442.0">
@@ -24,12 +23,12 @@
             </VBox>
             <VBox alignment="CENTER_LEFT" prefHeight="143.0" prefWidth="280.0">
                <children>
-                  <Label styleClass="alert-tittle" text="Alert title">
+                  <Label fx:id="lbAlertTitle" styleClass="alert-tittle" text="Alert title">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label text="Info description text" />
+                  <Label fx:id="lbAlertDesc" text="Info description text" />
                </children>
             </VBox>
          </children>
