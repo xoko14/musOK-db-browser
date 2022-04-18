@@ -3,6 +3,7 @@ package com.musok.musokdbbrowser.api.connection
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
+import com.musok.musokdbbrowser.api.exceptions.InternalServerErrorException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.api.mappings.auth.Token
@@ -43,10 +44,14 @@ object Server {
             .queryString("skip", skip)
             .queryString("limit", limit)
             .asJson()
-            .body.toString()
 
         val itemType = object: TypeToken<List<User>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun createUser(username: String, hashedPwd: String): User{
@@ -71,8 +76,12 @@ object Server {
             .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
-            .body.toString()
-        return Gson().fromJson(response, User::class.java)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), User::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getCurrentUserUploaded(skip: String = "0", limit: String = "100"): List<Song>{
@@ -82,9 +91,14 @@ object Server {
                 .queryString("skip", skip)
                 .queryString("limit", limit)
                 .asJson()
-                .body.toString()
+
         val itemType = object: TypeToken<List<Song>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getCurrentUserFavs(skip: String = "0", limit: String = "100"): List<Song>{
@@ -94,17 +108,26 @@ object Server {
             .queryString("skip", skip)
             .queryString("limit", limit)
             .asJson()
-            .body.toString()
+
         val itemType = object: TypeToken<List<Song>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getUser(id: String): User{
         val response = Unirest.get("$url/users/$id")
             .header("accept", "application/json")
             .asJson()
-            .body.toString()
-        return Gson().fromJson(response, User::class.java)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), User::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getUserUploaded(id: String, skip: String = "0", limit: String = "100"): List<Song>{
@@ -114,9 +137,14 @@ object Server {
                 .queryString("skip", skip)
                 .queryString("limit", limit)
                 .asJson()
-                .body.toString()
+
         val itemType = object: TypeToken<List<Song>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getUserFavs(id: String, skip: String = "0", limit: String = "100"): List<Song>{
@@ -126,9 +154,14 @@ object Server {
             .queryString("skip", skip)
             .queryString("limit", limit)
             .asJson()
-            .body.toString()
+
         val itemType = object: TypeToken<List<Song>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
     //</editor-fold>
 
@@ -139,10 +172,14 @@ object Server {
             .queryString("skip", skip)
             .queryString("limit", limit)
             .asJson()
-            .body.toString()
 
         val itemType = object: TypeToken<List<Song>>() {}.type
-        return Gson().fromJson(response, itemType)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), itemType)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun createSong(){
@@ -153,8 +190,12 @@ object Server {
         val response = Unirest.get("$url/songs/$id")
             .header("accept", "application/json")
             .asJson()
-            .body.toString()
-        return Gson().fromJson(response, Song::class.java)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), Song::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     //TODO: GET SONG MEDIA
@@ -164,8 +205,12 @@ object Server {
             .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
-            .body.toString()
-        return  Gson().fromJson(response, SongStatus::class.java)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), SongStatus::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun unfavSong(id: String): SongStatus{
@@ -173,8 +218,12 @@ object Server {
             .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
-            .body.toString()
-        return  Gson().fromJson(response, SongStatus::class.java)
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), SongStatus::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
     //</editor-fold>
 

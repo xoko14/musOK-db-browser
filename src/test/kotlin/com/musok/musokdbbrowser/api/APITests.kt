@@ -1,8 +1,10 @@
 package com.musok.musokdbbrowser.api
 
 import com.musok.musokdbbrowser.api.connection.Server
+import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.api.mappings.song.FavStatus
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mindrot.jbcrypt.BCrypt
 
 class APITests {
@@ -83,7 +85,9 @@ class APITests {
     @Test
     fun createUser(){
         Server.url = "http://unnamed-chart-server.com:8000"
-        val user = Server.createUser("test1", BCrypt.hashpw("test", BCrypt.gensalt(10)))
-        println(user)
+
+        assertThrows<UserAlreadyRegisteredException> {
+            val user = Server.createUser("test1", BCrypt.hashpw("test", BCrypt.gensalt(10)))
+        }
     }
 }
