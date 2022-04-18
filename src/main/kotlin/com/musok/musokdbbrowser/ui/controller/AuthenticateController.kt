@@ -1,6 +1,8 @@
 package com.musok.musokdbbrowser.ui.controller
 
 import com.musok.musokdbbrowser.api.connection.Server
+import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
+import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -22,7 +24,17 @@ class AuthenticateController {
     @FXML
     fun onConnectAction(){
         Server.url = tfURL.text.trim()
-        Server.logIn(tfUser.text, pfPassword.text)
+        try {
+            Server.logIn(tfUser.text, pfPassword.text)
+        }
+        catch (e: IncorrectLoginException){
+            println("incorrect login")
+            return
+        }
+        catch (e: UnknownException){
+            println("something went wrong")
+            return
+        }
 
         val user = Server.getCurrentUser()
         println(user.username)

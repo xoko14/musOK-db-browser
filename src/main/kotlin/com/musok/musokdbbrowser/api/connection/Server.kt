@@ -2,6 +2,8 @@ package com.musok.musokdbbrowser.api.connection
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
+import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.mappings.auth.Token
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.api.mappings.song.SongStatus
@@ -23,10 +25,13 @@ object Server {
             .field("username", user)
             .field("password", password)
             .asJson()
-            .body.toString()
 
+        when(response.status){
+            200 -> token = Gson().fromJson(response.body.toString(), Token::class.java)
+            401 -> throw IncorrectLoginException()
+            else -> throw UnknownException()
+        }
 
-        token = Gson().fromJson(response, Token::class.java)
     }
     //</editor-fold>
 
