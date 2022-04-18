@@ -4,6 +4,7 @@ import com.musok.musokdbbrowser.api.connection.Server
 import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
+import com.musok.musokdbbrowser.ui.alerts.InfoAlert
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -29,7 +30,10 @@ class AuthenticateController {
             Server.logIn(tfUser.text, pfPassword.text)
         }
         catch (e: IncorrectLoginException){
-            println("incorrect login")
+            InfoAlert(
+                alertName = "Incorrect login",
+                alertDesc = "Username / password does not exist."
+            ).showAndWait()
             return
         }
         catch (e: UnknownException){
@@ -61,7 +65,10 @@ class AuthenticateController {
                 println("Account \"${user.username}\" succesfully created")
             }
             catch(e: UserAlreadyRegisteredException){
-                println("user already registered")
+                InfoAlert(
+                    alertName = "User already registered",
+                    alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                ).showAndWait()
             }
             catch (e: UnknownException){
                 println("something went wrong")

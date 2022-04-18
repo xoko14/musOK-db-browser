@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.SVGPath?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" stylesheets="@../../../../../target/classes/theme/dark-theme.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="167.0" prefWidth="442.0" stylesheets="@../../../../../target/classes/theme/dark-theme.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox prefHeight="190.0" prefWidth="442.0">
          <children>
@@ -35,7 +35,7 @@
       </HBox>
       <HBox alignment="CENTER_RIGHT" prefHeight="35.0" prefWidth="422.0">
          <children>
-            <Button mnemonicParsing="false" text="OK" />
+            <Button mnemonicParsing="false" onAction="#onOkAction" text="OK" />
          </children>
       </HBox>
    </children>

@@ -17,12 +17,20 @@ class InfoAlert(
 
     init {
         val loader = FXMLLoader()
-        loader.location = this::class.java.getResource("/views/authenticate-view.fxml")
+        loader.location = this::class.java.getResource("/views/alerts/info-alert.fxml")
         loader.resources = ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
+        loader.setController(this)
         val root: Parent = loader.load()
         this.scene = Scene(root)
         this.scene.stylesheets.removeAll()
         this.scene.stylesheets.add("/theme/dark-theme.css")
         this.title = alertName
+        lbAlertTitle.text = alertName
+        lbAlertDesc.text = alertDesc
     }
+
+    @FXML fun onOkAction() {
+        this.close()
+    }
+
 }
