@@ -1,6 +1,8 @@
 package com.musok.musokdbbrowser.ui.components
 
+import com.musok.musokdbbrowser.api.connection.Server
 import com.musok.musokdbbrowser.api.mappings.song.Song
+import com.musok.musokdbbrowser.api.mappings.user.User
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.SnapshotParameters
@@ -26,6 +28,9 @@ class SongInfo(val song: Song): VBox(){
     @FXML lateinit var lbNormalCharter: Label
     @FXML lateinit var lbDiffHard: Label
     @FXML lateinit var lbHardCharter: Label
+    @FXML lateinit var lbUploader: Label
+
+    private val uploader: User
 
     init{
         val loader = FXMLLoader(javaClass.getResource("/views/components/song-info.fxml"))
@@ -60,5 +65,8 @@ class SongInfo(val song: Song): VBox(){
         lbEasyCharter.text = song.easyDiff[2]
         lbNormalCharter.text = song.normalDiff[2]
         lbHardCharter.text = song.hardDiff[2]
+
+        uploader = Server.getUser(song.uploader.toString())
+        lbUploader.text = uploader.username
     }
 }

@@ -28,6 +28,7 @@ class UserController: Initializable {
             stage.scene.stylesheets.removeAll()
             stage.scene.stylesheets.add("/theme/dark-theme.css")
             stage.title = "Login"
+            stage.isResizable = false
             stage.showAndWait()
         }
 

@@ -62,24 +62,29 @@ class AuthenticateController {
                         username = tfUserSu.text.trim(),
                         hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
                 )
-                println("Account \"${user.username}\" succesfully created")
             }
             catch(e: UserAlreadyRegisteredException){
                 InfoAlert(
                     alertName = "User already registered",
                     alertDesc = "User with name \n${tfUserSu.text}\n already exists."
                 ).showAndWait()
+                return
             }
             catch (e: UnknownException){
                 println("something went wrong")
+                return
             }
 
+            InfoAlert(
+                alertName = "Sign up successful",
+                alertDesc = "User \n${tfUserSu.text}\n created successfully."
+            ).showAndWait()
+
         } else {
-            val alert = Alert(AlertType.INFORMATION)
-            alert.title = "HAHA"
-            alert.headerText = "u dun goofed"
-            alert.contentText = "somebody f'd up haha fnny"
-            alert.showAndWait()
+            InfoAlert(
+                alertName = "Passwords don't match",
+                alertDesc = "Please check that the passwords match."
+            ).showAndWait()
         }
     }
 

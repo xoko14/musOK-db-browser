@@ -28,7 +28,7 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lbAlertDesc" text="Info description text" />
+                  <Label fx:id="lbAlertDesc" alignment="TOP_LEFT" cacheShape="false" text="Info description text" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>
