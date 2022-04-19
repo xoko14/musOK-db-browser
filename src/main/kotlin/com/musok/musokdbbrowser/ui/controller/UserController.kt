@@ -17,22 +17,6 @@ class UserController: Initializable {
     @FXML private lateinit var taUserInfo: TextArea
     private lateinit var user: User
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
-
-        if(!Server.isLoggedIn()){
-            val loader = FXMLLoader()
-            loader.location = this::class.java.getResource("/views/authenticate-view.fxml")
-            loader.resources = ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
-            val root: Parent = loader.load()
-            val stage = Stage()
-            stage.scene = Scene(root)
-            stage.scene.stylesheets.removeAll()
-            stage.scene.stylesheets.add("/theme/dark-theme.css")
-            stage.title = "Login"
-            stage.isResizable = false
-            stage.showAndWait()
-        }
-
-
         user = Server.getCurrentUser()
 
         println(user)
