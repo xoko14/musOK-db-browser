@@ -6,7 +6,7 @@
 
     <groupId>com.musok</groupId>
     <artifactId>musOK-db-browser</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>musOK-db-browser</name>
 
 
