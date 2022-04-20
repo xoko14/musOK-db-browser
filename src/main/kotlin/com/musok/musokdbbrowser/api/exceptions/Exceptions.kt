@@ -1,6 +1,7 @@
 package com.musok.musokdbbrowser.api.exceptions
 
-class IncorrectLoginException: Exception()
-class UserAlreadyRegisteredException: Exception()
-class UnknownException: Exception()
-class InternalServerErrorException: Exception()
+open class ServerAPIException: Exception()
+class IncorrectLoginException: ServerAPIException()
+class UserAlreadyRegisteredException: ServerAPIException()
+class UnknownException: ServerAPIException()
+class InternalServerErrorException: ServerAPIException()
