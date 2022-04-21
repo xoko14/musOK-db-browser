@@ -71,7 +71,16 @@ class SongCard(val song: Song): VBox() {
                     svgPlayback.content = SVGPaths.LOADING
                     thread(start = true){
                         clip = AudioSystem.getClip()
-                        clip.open(AudioSystem.getAudioInputStream(URL(song.audioURL)))
+                        try {
+                            clip.open(AudioSystem.getAudioInputStream(URL(song.audioURL)))
+                        }
+                        catch (e: Exception){
+                            e.printStackTrace()
+                            svgPlayback.content = SVGPaths.ERROR
+                            playbackStatus = PlaybackStatus.STOPPED
+                            return@thread
+                        }
+
                         clip.start()
                         playbackStatus = PlaybackStatus.PLAYING
                         svgPlayback.content = SVGPaths.PAUSE
