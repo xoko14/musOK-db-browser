@@ -28,7 +28,12 @@ class LocalBrowseController: Initializable {
                     p.toFile().isFile
                 }.forEach { f: Path ->
                     if (f.toString().endsWith("song.xml")) {
-                        songs.add(Persister().read(SongXml::class.java, f.toFile()).toSong())
+                        try {
+                            songs.add(Persister().read(SongXml::class.java, f.toFile()).toSong(f.toString().replace("song.xml", "")))
+                        }
+                        catch (e: Exception) {
+                            e.printStackTrace()
+                        }
                     }
                 }
             }

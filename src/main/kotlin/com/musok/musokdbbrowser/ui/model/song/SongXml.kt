@@ -1,77 +1,57 @@
 package com.musok.musokdbbrowser.ui.model.song
 
 import com.musok.musokdbbrowser.api.mappings.song.Song
-import org.simpleframework.xml.Attribute
 import org.simpleframework.xml.Element
 import org.simpleframework.xml.Root
 
-@Root(name = "chart", strict = false)
+@Root(name = "chart")
 class SongXml {
-    @field:Element(name = "title")
+    @field:Element
     var title: String? = null
 
-    @field:Element(name = "artist")
+    @field:Element
     var artist: String? = null
 
-    @field:Element(name = "easy", type = Difficulty::class)
-    var easyDiff: Difficulty? = null
-    @field:Element(name = "normal", type = Difficulty::class)
-    var normalDiff: Difficulty? = null
-    @field:Element(name = "hard", type = Difficulty::class)
-    var hardDiff: Difficulty? = null
+    @field:Element
+    var easy: Difficulty? = null
+    @field:Element
+    var normal: Difficulty? = null
+    @field:Element
+    var hard: Difficulty? = null
 
-    @field:Element(name = "music")
+    @field:Element
     var music: Music? = null
-    @field:Element(name = "jacket")
+    @field:Element
     var jacket: Jacket? = null
 
-    abstract class File {
-        @field:Attribute(name = "file")
-        var file: String? = null
-    }
-
-    class Difficulty : File() {
-        @field:Attribute(name = "charter")
-        var charter: String? = null
-        @field:Attribute(name = "difficulty")
-        var difficulty: String? = null
-    }
-
-    class Music : File()
-
-    class Jacket : File() {
-        @field:Attribute(name = "artist")
-        var artist: String? = null
-    }
-
-    fun toSong(): Song {
+    fun toSong(path: String): Song {
         return LocalSong(
             songName = this.title ?: "null",
             author = this.artist ?: "null",
             music = music?.file ?: "null",
             easyDiff = listOf(
-                this.easyDiff?.difficulty ?: "null",
-                this.easyDiff?.file ?: "null",
-                this.easyDiff?.charter ?: "null"
+                this.easy?.difficulty ?: "null",
+                this.easy?.file ?: "null",
+                this.easy?.charter ?: "null"
             ),
             normalDiff = listOf(
-                this.normalDiff?.difficulty ?: "null",
-                this.normalDiff?.file ?: "null",
-                this.normalDiff?.charter ?: "null"
+                this.normal?.difficulty ?: "null",
+                this.normal?.file ?: "null",
+                this.normal?.charter ?: "null"
             ),
             hardDiff = listOf(
-                this.hardDiff?.difficulty ?: "null",
-                this.hardDiff?.file ?: "null",
-                this.hardDiff?.charter ?: "null"
+                this.hard?.difficulty ?: "null",
+                this.hard?.file ?: "null",
+                this.hard?.charter ?: "null"
             ),
             songArt = listOf(jacket?.file ?: "null", jacket?.artist ?: "null"),
             uploader = -1,
             id = -1,
-            artURL = jacket?.file ?: "null",
-            audioURL = music?.file ?: "null",
-            easyChartURL = this.easyDiff?.file ?: "null",
-            normalChartURL = this.normalDiff?.file ?: "null",
-            hardChartURL = this.hardDiff?.file ?: "null",
+            artURL = (path + jacket?.file) ?: "null",
+            audioURL = ("file:///"+path + music?.file) ?: "null",
+            easyChartURL = (path + this.easy?.file) ?: "null",
+            normalChartURL = (path + this.normal?.file) ?: "null",
+            hardChartURL = (path + this.hard?.file) ?: "null",
         )
     }
 }

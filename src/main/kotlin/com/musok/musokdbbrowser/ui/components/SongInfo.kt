@@ -30,7 +30,7 @@ class SongInfo(val song: Song): VBox(){
     @FXML lateinit var lbHardCharter: Label
     @FXML lateinit var lbUploader: Label
 
-    private val uploader: User
+    private var uploader: User?
 
     init{
         val loader = FXMLLoader(javaClass.getResource("/views/components/song-info.fxml"))
@@ -66,7 +66,11 @@ class SongInfo(val song: Song): VBox(){
         lbNormalCharter.text = song.normalDiff[2]
         lbHardCharter.text = song.hardDiff[2]
 
-        uploader = Server.getUser(song.uploader.toString())
-        lbUploader.text = uploader.username
+        uploader = null
+        if(song.uploader!= (-1).toLong()){
+            uploader = Server.getUser(song.uploader.toString())
+            lbUploader.text = uploader?.username
+        }
+
     }
 }
