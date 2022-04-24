@@ -1,19 +1,18 @@
 package com.musok.musokdbbrowser.ui.controller
 
 import com.musok.musokdbbrowser.api.mappings.song.Song
-import com.musok.musokdbbrowser.ui.components.SongCard
+import com.musok.musokdbbrowser.ui.components.LocalSongCard
 import com.musok.musokdbbrowser.ui.model.song.SongXml
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.layout.FlowPane
+import org.controlsfx.control.Notifications
 import org.simpleframework.xml.core.Persister
 import java.net.URL
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
-import java.util.function.Consumer
-import java.util.function.Predicate
 import kotlin.collections.ArrayList
 
 
@@ -45,9 +44,13 @@ class LocalBrowseController: Initializable {
         }
 
         for (song in songs){
-            val songCard = SongCard(song)
+            val songCard = LocalSongCard(song)
 
             songCard.setOnDownload{
+                Notifications.create()
+                    .title("test")
+                    .text("test text")
+                    .show()
                 println("Downloading ${songCard.song.songName}...")
             }
 

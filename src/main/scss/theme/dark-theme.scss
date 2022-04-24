@@ -224,3 +224,49 @@ $textfield-color: #40596c;
 .info-diff-card-title{
   -fx-font-size: 1.5em;
 }
+
+.settings-section > Label{
+  -fx-font-size: 2em;
+}
+
+.choice-box {
+  -fx-background-color: $button-color;
+  -fx-border-color: $button-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-mark-color: $button-border-color;
+  -fx-effect: none;
+}
+.choice-box .arrow{
+  -fx-background-color: $button-border-color;
+}
+.choice-box > .label {
+  -fx-text-fill: $text-color;
+}
+
+.choice-box:pressed, .choice-box:pressed:hover{
+  -fx-background-color: $button-color;
+  -fx-border-color: $pressed-border-color;
+  -fx-border-radius: 3;
+  -fx-border-width: 2;
+  -fx-text-fill: $text-color;
+}
+
+.choice-box .context-menu {
+  -fx-background-color: $background-color;
+  -fx-text-fill: $text-color;
+}
+
+.choice-box .context-menu .menu-item:focused {
+  -fx-background-color: $pressed-border-color;
+  -fx-text-fill: $text-color;
+
+}
+
+.choice-box .context-menu .menu-item .label {
+  -fx-text-fill: $text-color;
+}
+
+.choice-box .context-menu .menu-item:focused .label {
+  -fx-text-fill: $text-color;
+}

@@ -47,11 +47,11 @@ class SongXml {
             songArt = listOf(jacket?.file ?: "null", jacket?.artist ?: "null"),
             uploader = -1,
             id = -1,
-            artURL = (path + jacket?.file) ?: "null",
-            audioURL = ("file:///"+path + music?.file) ?: "null",
-            easyChartURL = (path + this.easy?.file) ?: "null",
-            normalChartURL = (path + this.normal?.file) ?: "null",
-            hardChartURL = (path + this.hard?.file) ?: "null",
+            artURL = (path + jacket?.file),
+            audioURL = ("file:///"+path + music?.file),
+            easyChartURL = (path + this.easy?.file),
+            normalChartURL = (path + this.normal?.file),
+            hardChartURL = (path + this.hard?.file),
         )
     }
 }
