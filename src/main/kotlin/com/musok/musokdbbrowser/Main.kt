@@ -1,6 +1,7 @@
 package com.musok.musokdbbrowser
 
 import com.musok.musokdbbrowser.api.connection.Server
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
@@ -10,6 +11,7 @@ import java.util.*
 
 class MainApp: Application(){
     override fun start(stage: Stage) {
+        SettingsManager.load()
 
         if(!Server.isLoggedIn()){
             val loader = FXMLLoader()

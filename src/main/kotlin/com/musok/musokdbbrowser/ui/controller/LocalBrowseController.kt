@@ -3,6 +3,7 @@ package com.musok.musokdbbrowser.ui.controller
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.ui.components.LocalSongCard
 import com.musok.musokdbbrowser.ui.model.song.SongXml
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.layout.FlowPane
@@ -22,7 +23,7 @@ class LocalBrowseController: Initializable {
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
         try {
-            Files.walk(Paths.get("A:\\Games\\MusOK\\charts")).use { walkStream ->
+            Files.walk(Paths.get(SettingsManager.settings?.chartsLocation ?: "")).use { walkStream ->
                 walkStream.filter { p: Path ->
                     p.toFile().isFile
                 }.forEach { f: Path ->

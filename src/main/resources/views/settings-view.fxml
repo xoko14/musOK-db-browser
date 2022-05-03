@@ -35,7 +35,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </TextField>
-                        <Button mnemonicParsing="false" text="%pickFolder" />
+                        <Button mnemonicParsing="false" text="%pickFolder" onAction="#chooseFolder"/>
                      </children>
                   </HBox>
                </children>
@@ -53,13 +53,13 @@
                   <HBox VBox.vgrow="ALWAYS">
                      <children>
                         <ChoiceBox fx:id="cbLanguage" prefWidth="150.0" >
-                           <items>
-                              <FXCollections fx:factory="observableArrayList">
-                                 <String fx:value="%en_EN"/>
-                                 <String fx:value="%es_ES"/>
-                                 <String fx:value="%gl_ES"/>
-                              </FXCollections>
-                           </items>
+<!--                           <items>-->
+<!--                              <FXCollections fx:factory="observableArrayList">-->
+<!--                                 <String fx:value="%enUS"/>-->
+<!--                                 <String fx:value="%esES"/>-->
+<!--                                 <String fx:value="%glES"/>-->
+<!--                              </FXCollections>-->
+<!--                           </items>-->
                         </ChoiceBox>
                      </children>
                   </HBox>
@@ -71,7 +71,7 @@
    <bottom>
       <HBox alignment="BOTTOM_RIGHT">
          <children>
-            <Button mnemonicParsing="false" text="%saveSettings">
+            <Button mnemonicParsing="false" text="%saveSettings" onAction="#saveSettings">
                <HBox.margin>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </HBox.margin></Button>
