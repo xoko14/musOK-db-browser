@@ -16,11 +16,6 @@ class BrowseController: Initializable {
         val songs = Server.getAllSongs()
         for (song in songs){
             val songCard = SongCard(song)
-
-            songCard.setOnDownload{
-                println("Downloading ${songCard.song.songName}...")
-            }
-
             rootPane.children.add(songCard)
         }
     }

@@ -1,5 +1,6 @@
 package com.musok.musokdbbrowser.ui.controller
 
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.ChoiceBox
@@ -16,16 +17,17 @@ class SettingsController: Initializable {
 
     override fun initialize(p0: URL?, rb: ResourceBundle?) {
         Locale.getDefault()
-        cbLanguage.items.add(rb?.getString("en_US"))
-        cbLanguage.items.add(rb?.getString("es_ES"))
-        cbLanguage.items.add(rb?.getString("gl_ES"))
+        cbLanguage.items.add(rb?.getString("en-US"))
+        cbLanguage.items.add(rb?.getString("es-ES"))
+        cbLanguage.items.add(rb?.getString("gl-ES"))
         try {
-            cbLanguage.value = 1
+            cbLanguage.value = rb?.getString(Locale.getDefault().toLanguageTag())
         }
         catch (_: MissingResourceException){
-            println(Locale.getDefault())
-            cbLanguage.value = rb?.getString("en_US")
+            println(Locale.getDefault().toLanguageTag())
+            cbLanguage.value = rb?.getString("en-US")
         }
+        tfFolderPath.text = SettingsManager.settings?.chartsLocation
     }
 
     @FXML
