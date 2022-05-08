@@ -6,7 +6,7 @@
 
     <groupId>com.musok</groupId>
     <artifactId>musOK-db-browser</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <name>musOK-db-browser</name>
 
 
@@ -23,28 +23,28 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>linux</classifier>
             <scope>compile</scope>
         </dependency>
@@ -52,28 +52,28 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>win</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>win</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>win</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>win</classifier>
             <scope>compile</scope>
         </dependency>
@@ -81,28 +81,28 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>mac</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-media</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>mac</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>mac</classifier>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
-            <version>17</version>
+            <version>18.0.1</version>
             <classifier>mac</classifier>
             <scope>compile</scope>
         </dependency>
@@ -116,7 +116,7 @@
         <dependency>
             <groupId>com.dlsc.formsfx</groupId>
             <artifactId>formsfx-core</artifactId>
-            <version>11.3.2</version>
+            <version>11.5.0</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>
@@ -140,27 +140,6 @@
             <groupId>net.synedra</groupId>
             <artifactId>validatorfx</artifactId>
             <version>0.3.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.openjfx</groupId>
-                    <artifactId>*</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.kordamp.ikonli</groupId>
-            <artifactId>ikonli-javafx</artifactId>
-            <version>12.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.kordamp.bootstrapfx</groupId>
-            <artifactId>bootstrapfx-core</artifactId>
-            <version>0.4.0</version>
-        </dependency>
-        <dependency>
-            <groupId>eu.hansolo</groupId>
-            <artifactId>tilesfx</artifactId>
-            <version>11.48</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.openjfx</groupId>

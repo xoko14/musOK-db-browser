@@ -7,6 +7,7 @@ import com.musok.musokdbbrowser.ui.model.song.Music
 import com.musok.musokdbbrowser.ui.model.song.SongXml
 import com.musok.musokdbbrowser.ui.static.SettingsManager
 import com.musok.musokdbbrowser.ui.util.SVGPaths
+import javafx.application.Platform
 import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
 import javafx.scene.Scene
@@ -22,6 +23,7 @@ import javafx.scene.shape.Rectangle
 import javafx.scene.shape.SVGPath
 import javafx.stage.Stage
 import kong.unirest.Unirest
+import org.controlsfx.control.Notifications
 import org.simpleframework.xml.core.Persister
 import java.io.File
 import java.io.IOException
@@ -39,6 +41,7 @@ class SongCard(val song: Song): VBox() {
     @FXML lateinit var btnDownload: Button
     @FXML lateinit var btnPlayback: Button
     @FXML lateinit var svgPlayback: SVGPath
+    @FXML lateinit var svgDownload: SVGPath
 
     private var playbackStatus: PlaybackStatus = PlaybackStatus.STOPPED
     private lateinit var clip: Clip
@@ -111,61 +114,75 @@ class SongCard(val song: Song): VBox() {
         }
 
         btnDownload.setOnAction {
-            val folderName = "${song.id}_${song.songName.replace(' ', '-')}"
-            val chartsLocation = SettingsManager.settings?.chartsLocation?: "./charts"
-            val chartFolder = File(chartsLocation, folderName)
-            if (!chartFolder.exists()) chartFolder.mkdir()
+            val thisaction = btnDownload.onAction
+            svgDownload.content = SVGPaths.LOADING
+            btnDownload.setOnAction {  }
+            thread(start = true) {
+                val folderName = "${song.id}_${song.songName.replace(' ', '-')}"
+                val chartsLocation = SettingsManager.settings?.chartsLocation?: "./charts"
+                val chartFolder = File(chartsLocation, folderName)
+                if (!chartFolder.exists()) chartFolder.mkdir()
 
-            fun downloadChartFile(source:String, target:String){
-                Unirest.get(source)
-                    .downloadMonitor { b, fileName, bytesWritten, totalBytes ->
-                        println("Downloading $fileName -> ${totalBytes - bytesWritten}")
-                    }
-                    .asFile(File(chartFolder, target).absolutePath)
-            }
+                fun downloadChartFile(source:String, target:String){
+                    Unirest.get(source)
+                        .downloadMonitor { b, fileName, bytesWritten, totalBytes ->
+                            println("Downloading $fileName -> ${totalBytes - bytesWritten}")
+                        }
+                        .asFile(File(chartFolder, target).absolutePath)
+                }
 
-            downloadChartFile(song.audioURL, "song.wav")
-            downloadChartFile(song.artURL, "jacket.wav")
-            downloadChartFile(song.easyChartURL, "song_e.chart")
-            downloadChartFile(song.normalChartURL, "song_n.chart")
-            downloadChartFile(song.hardChartURL, "song_h.chart")
+                downloadChartFile(song.audioURL, "song.wav")
+                downloadChartFile(song.artURL, "jacket.png")
+                downloadChartFile(song.easyChartURL, "song_e.chart")
+                downloadChartFile(song.normalChartURL, "song_n.chart")
+                downloadChartFile(song.hardChartURL, "song_h.chart")
 
-            var songinfo = SongXml()
-            songinfo.title = song.songName
-            songinfo.artist = song.author
-            songinfo.easy = run {
-                val diff = Difficulty()
-                diff.file = "song_e.chart"
-                diff.charter = song.easyDiff[2]
-                diff.difficulty = song.easyDiff[0]
-                diff
+                var songinfo = SongXml()
+                songinfo.title = song.songName
+                songinfo.artist = song.author
+                songinfo.easy = run {
+                    val diff = Difficulty()
+                    diff.file = "song_e.chart"
+                    diff.charter = song.easyDiff[2]
+                    diff.difficulty = song.easyDiff[0]
+                    diff
+                }
+                songinfo.normal = run {
+                    val diff = Difficulty()
+                    diff.file = "song_n.chart"
+                    diff.charter = song.normalDiff[2]
+                    diff.difficulty = song.normalDiff[0]
+                    diff
+                }
+                songinfo.hard = run {
+                    val diff = Difficulty()
+                    diff.file = "song_h.chart"
+                    diff.charter = song.hardDiff[2]
+                    diff.difficulty = song.hardDiff[0]
+                    diff
+                }
+                songinfo.music = run {
+                    val music = Music()
+                    music.file="song.wav"
+                    music
+                }
+                songinfo.jacket = run {
+                    val jacket = Jacket()
+                    jacket.file = "jacket.png"
+                    jacket.artist = song.songArt[1]
+                    jacket
+                }
+                Persister().write(songinfo, File(chartFolder.absolutePath, "song.xml"))
+
+                Platform.runLater {
+                    btnDownload.onAction = thisaction
+                    svgDownload.content = SVGPaths.DOWNLOAD
+                    Notifications.create()
+                        .title("Download completed")
+                        .text("${song.songName} downloaded!")
+                        .showInformation()
+                }
             }
-            songinfo.normal = run {
-                val diff = Difficulty()
-                diff.file = "song_n.chart"
-                diff.charter = song.normalDiff[2]
-                diff.difficulty = song.normalDiff[0]
-                diff
-            }
-            songinfo.hard = run {
-                val diff = Difficulty()
-                diff.file = "song_h.chart"
-                diff.charter = song.hardDiff[2]
-                diff.difficulty = song.hardDiff[0]
-                diff
-            }
-            songinfo.music = run {
-                val music = Music()
-                music.file="song.wav"
-                music
-            }
-            songinfo.jacket = run {
-                val jacket = Jacket()
-                jacket.file = "jacket.png"
-                jacket.artist = song.songArt[1]
-                jacket
-            }
-            Persister().write(songinfo, File(chartFolder.absolutePath, "song.xml"))
         }
     }
 }

@@ -22,6 +22,17 @@ class LocalBrowseController: Initializable {
     private var songs: MutableList<Song> = ArrayList()
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
+        populateView()
+    }
+
+    @FXML
+    fun update(){
+        populateView()
+    }
+
+    private fun populateView(){
+        rootPane.children.clear()
+        songs.clear()
         try {
             Files.walk(Paths.get(SettingsManager.settings?.chartsLocation ?: "")).use { walkStream ->
                 walkStream.filter { p: Path ->

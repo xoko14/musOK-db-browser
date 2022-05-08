@@ -39,7 +39,8 @@ class SettingsController: Initializable {
 
     @FXML
     fun saveSettings(){
-
+        SettingsManager.settings?.chartsLocation = tfFolderPath.text
+        SettingsManager.save()
     }
 
 }
