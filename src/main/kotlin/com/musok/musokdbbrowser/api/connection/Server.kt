@@ -7,6 +7,7 @@ import com.musok.musokdbbrowser.api.exceptions.InternalServerErrorException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.api.mappings.auth.Token
+import com.musok.musokdbbrowser.api.mappings.legal.Legal
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.api.mappings.song.SongStatus
 import com.musok.musokdbbrowser.api.mappings.user.User
@@ -227,4 +228,19 @@ object Server {
     }
     //</editor-fold>
 
+    //<editor-fold desc="legal">
+
+    fun getLegal(): Legal{
+        val response = Unirest.get("$url/legal")
+            .header("accept", "application/json")
+            .asJson()
+
+        when(response.status) {
+            200 -> return Gson().fromJson(response.body.toString(), Legal::class.java)
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
+    }
+
+    //</editor-fold>
 }

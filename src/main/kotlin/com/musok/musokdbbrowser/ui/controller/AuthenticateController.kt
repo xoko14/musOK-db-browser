@@ -5,6 +5,7 @@ import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
 import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.ui.alerts.InfoAlert
+import com.musok.musokdbbrowser.ui.alerts.LegalAlert
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -86,6 +87,12 @@ class AuthenticateController {
                 alertDesc = "Please check that the passwords match."
             ).showAndWait()
         }
+    }
+
+    fun onAcceptTC() {
+        Server.url = tfURLsu.text
+        val legalAlert = LegalAlert()
+        legalAlert.showAndWait()
     }
 
 

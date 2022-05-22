@@ -90,4 +90,12 @@ class APITests {
             val user = Server.createUser("test1", BCrypt.hashpw("test", BCrypt.gensalt(10)))
         }
     }
+
+    @Test
+    fun getLegal(){
+        Server.url = "http://unnamed-chart-server.com:8000"
+        val legal = Server.getLegal()
+        println(legal)
+        assert(true)
+    }
 }
