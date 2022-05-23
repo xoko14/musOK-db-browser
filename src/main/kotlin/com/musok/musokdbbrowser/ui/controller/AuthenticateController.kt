@@ -56,30 +56,32 @@ class AuthenticateController {
 
     @FXML
     fun createAccount(){
-        if(pfPassSu.text.trim() == pfPassConfSu.text.trim()){
+        if(pfPassSu.text.trim() == pfPassConfSu.text.trim()) {
             Server.url = tfURLsu.text.trim()
-            try {
-                val user = Server.createUser(
+            val legalAlert = LegalAlert()
+            val accepted = legalAlert.ask()
+            if (accepted == true) {
+                try {
+                    val user = Server.createUser(
                         username = tfUserSu.text.trim(),
                         hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
-                )
-            }
-            catch(e: UserAlreadyRegisteredException){
-                InfoAlert(
-                    alertName = "User already registered",
-                    alertDesc = "User with name \n${tfUserSu.text}\n already exists."
-                ).showAndWait()
-                return
-            }
-            catch (e: UnknownException){
-                println("something went wrong")
-                return
-            }
+                    )
+                } catch (e: UserAlreadyRegisteredException) {
+                    InfoAlert(
+                        alertName = "User already registered",
+                        alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                    ).showAndWait()
+                    return
+                } catch (e: UnknownException) {
+                    println("something went wrong")
+                    return
+                }
 
-            InfoAlert(
-                alertName = "Sign up successful",
-                alertDesc = "User \n${tfUserSu.text}\n created successfully."
-            ).showAndWait()
+                InfoAlert(
+                    alertName = "Sign up successful",
+                    alertDesc = "User \n${tfUserSu.text}\n created successfully."
+                ).showAndWait()
+            }
 
         } else {
             InfoAlert(
@@ -87,12 +89,6 @@ class AuthenticateController {
                 alertDesc = "Please check that the passwords match."
             ).showAndWait()
         }
-    }
-
-    fun onAcceptTC() {
-        Server.url = tfURLsu.text
-        val legalAlert = LegalAlert()
-        legalAlert.showAndWait()
     }
 
 

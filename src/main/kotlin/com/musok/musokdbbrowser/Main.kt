@@ -6,6 +6,7 @@ import javafx.application.Application
 import javafx.fxml.FXMLLoader
 import javafx.scene.Parent
 import javafx.scene.Scene
+import javafx.scene.image.Image
 import javafx.stage.Stage
 import java.util.*
 
@@ -19,6 +20,7 @@ class MainApp: Application(){
             loader.resources = ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
             val root: Parent = loader.load()
             val stageLogIn = Stage()
+            stageLogIn.icons.add(Image("/icon/icon.png"))
             stageLogIn.scene = Scene(root)
             stageLogIn.scene.stylesheets.removeAll()
             stageLogIn.scene.stylesheets.add("/theme/dark-theme.css")
@@ -31,6 +33,7 @@ class MainApp: Application(){
         fxmlLoader.resources = ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
         val scene = Scene(fxmlLoader.load())
         scene.stylesheets.add("/theme/dark-theme.css")
+        stage.icons.add(Image("/icon/icon.png"))
         stage.title = "MusOK Browser"
         stage.scene = scene
         stage.show()

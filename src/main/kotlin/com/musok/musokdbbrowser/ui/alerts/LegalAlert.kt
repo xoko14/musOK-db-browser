@@ -13,6 +13,7 @@ import java.util.*
 class LegalAlert(): Stage() {
     @FXML
     lateinit var textbox: TextArea
+    private var accepted: Boolean? = null
 
     init {
         val loader = FXMLLoader()
@@ -27,9 +28,21 @@ class LegalAlert(): Stage() {
         textbox.text = Server.getLegal().text
     }
 
+    fun ask(): Boolean?{
+        this.showAndWait()
+        return accepted
+    }
+
     @FXML
     fun onOkAction() {
         this.close()
+        accepted = true
+    }
+
+    @FXML
+    fun onCancelAction(){
+        this.close()
+        accepted = false
     }
 
 }

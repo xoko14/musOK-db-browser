@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane prefHeight="384.0" prefWidth="250.0" stylesheets="@../../../../target/classes/theme/dark-theme.css" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="115.0" tabMinWidth="87.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.ui.controller.AuthenticateController">
+<TabPane prefHeight="305.0" prefWidth="250.0" stylesheets="@../../../../target/classes/theme/dark-theme.css" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="115.0" tabMinWidth="87.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.musok.musokdbbrowser.ui.controller.AuthenticateController">
    <tabs>
       <Tab styleClass="tab-fullsize" text="%login">
          <content>
@@ -51,11 +51,6 @@
                   <PasswordField fx:id="pfPassSu" />
                   <Label text="%repeatPass" />
                   <PasswordField fx:id="pfPassConfSu" />
-                  <CheckBox mnemonicParsing="false" text="%ihaveread" onAction="#onAcceptTC">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </CheckBox>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
                         <Button mnemonicParsing="false" onAction="#createAccount" text="Create account" BorderPane.alignment="CENTER" />
