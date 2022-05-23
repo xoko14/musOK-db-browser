@@ -56,37 +56,44 @@ class AuthenticateController {
 
     @FXML
     fun createAccount(){
-        if(pfPassSu.text.trim() == pfPassConfSu.text.trim()) {
-            Server.url = tfURLsu.text.trim()
-            val legalAlert = LegalAlert()
-            val accepted = legalAlert.ask()
-            if (accepted == true) {
-                try {
-                    val user = Server.createUser(
-                        username = tfUserSu.text.trim(),
-                        hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
-                    )
-                } catch (e: UserAlreadyRegisteredException) {
+        if(tfURLsu.text.isNotBlank() && tfUserSu.text.isNotBlank() && pfPassSu.text.isNotBlank() && pfPassConfSu.text.isNotBlank()){
+            if(pfPassSu.text.trim() == pfPassConfSu.text.trim()) {
+                Server.url = tfURLsu.text.trim()
+                val legalAlert = LegalAlert()
+                val accepted = legalAlert.ask()
+                if (accepted == true) {
+                    try {
+                        val user = Server.createUser(
+                            username = tfUserSu.text.trim(),
+                            hashedPwd = BCrypt.hashpw(pfPassSu.text.trim(), BCrypt.gensalt(10))
+                        )
+                    } catch (e: UserAlreadyRegisteredException) {
+                        InfoAlert(
+                            alertName = "User already registered",
+                            alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                        ).showAndWait()
+                        return
+                    } catch (e: UnknownException) {
+                        println("something went wrong")
+                        return
+                    }
+
                     InfoAlert(
-                        alertName = "User already registered",
-                        alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                        alertName = "Sign up successful",
+                        alertDesc = "User \n${tfUserSu.text}\n created successfully."
                     ).showAndWait()
-                    return
-                } catch (e: UnknownException) {
-                    println("something went wrong")
-                    return
                 }
 
+            } else {
                 InfoAlert(
-                    alertName = "Sign up successful",
-                    alertDesc = "User \n${tfUserSu.text}\n created successfully."
+                    alertName = "Passwords don't match",
+                    alertDesc = "Please check that the passwords match."
                 ).showAndWait()
             }
-
         } else {
             InfoAlert(
-                alertName = "Passwords don't match",
-                alertDesc = "Please check that the passwords match."
+                alertName = "Info cannot be empty",
+                alertDesc = "Please fill all the textboxes."
             ).showAndWait()
         }
     }
