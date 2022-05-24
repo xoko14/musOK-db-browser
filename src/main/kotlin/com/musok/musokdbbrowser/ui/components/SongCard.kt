@@ -1,10 +1,13 @@
 package com.musok.musokdbbrowser.ui.components
 
+import com.google.gson.Gson
+import com.musok.musokdbbrowser.api.connection.Server
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.ui.model.song.Difficulty
 import com.musok.musokdbbrowser.ui.model.song.Jacket
 import com.musok.musokdbbrowser.ui.model.song.Music
 import com.musok.musokdbbrowser.ui.model.song.SongXml
+import com.musok.musokdbbrowser.ui.model.song.upload.UploadInfo
 import com.musok.musokdbbrowser.ui.static.SettingsManager
 import com.musok.musokdbbrowser.ui.util.SVGPaths
 import javafx.application.Platform
@@ -173,6 +176,13 @@ class SongCard(val song: Song): VBox() {
                     jacket
                 }
                 Persister().write(songinfo, File(chartFolder.absolutePath, "song.xml"))
+
+                val uploadInfo = UploadInfo(
+                    Server.url as String,
+                    song.id,
+                    song.uploader
+                )
+                File(chartFolder.absolutePath, "upload_info.json").writeText(Gson().toJson(uploadInfo))
 
                 Platform.runLater {
                     btnDownload.onAction = thisaction

@@ -1,7 +1,12 @@
 package com.musok.musokdbbrowser.ui.components
 
-import com.musok.musokdbbrowser.api.mappings.song.Song
+import com.google.gson.Gson
+import com.musok.musokdbbrowser.api.connection.Server
+import com.musok.musokdbbrowser.api.exceptions.IncorrectMediaTypeException
+import com.musok.musokdbbrowser.ui.model.song.LocalSong
+import com.musok.musokdbbrowser.ui.model.song.upload.UploadInfo
 import com.musok.musokdbbrowser.ui.util.SVGPaths
+import javafx.application.Platform
 import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.fxml.FXML
@@ -13,11 +18,14 @@ import javafx.scene.control.Label
 import javafx.scene.image.Image
 import javafx.scene.image.ImageView
 import javafx.scene.image.WritableImage
+import javafx.scene.layout.HBox
 import javafx.scene.layout.VBox
 import javafx.scene.paint.Color
 import javafx.scene.shape.Rectangle
 import javafx.scene.shape.SVGPath
 import javafx.stage.Stage
+import org.controlsfx.control.Notifications
+import java.io.File
 import java.io.IOException
 import java.net.URL
 import javax.sound.sampled.AudioSystem
@@ -25,7 +33,7 @@ import javax.sound.sampled.Clip
 import kotlin.concurrent.thread
 
 
-class LocalSongCard(val song: Song): VBox() {
+class LocalSongCard(val song: LocalSong): VBox() {
     @FXML lateinit var img: ImageView
     @FXML lateinit var lbName: Label
     @FXML lateinit var lbAuthor: Label
@@ -33,8 +41,9 @@ class LocalSongCard(val song: Song): VBox() {
     @FXML lateinit var btnDelete: Button
     @FXML lateinit var btnPlayback: Button
     @FXML lateinit var svgPlayback: SVGPath
+    @FXML lateinit var buttonContainer: HBox
 
-    private var playbackStatus: PlaybackStatus = PlaybackStatus.STOPPED
+    private var uploadStatus: UploadStatus = UploadStatus.NOT_STARTED
     private lateinit var clip: Clip
 
     init {
@@ -64,34 +73,52 @@ class LocalSongCard(val song: Song): VBox() {
         lbName.text = song.songName
         lbAuthor.text = song.author
 
-        btnPlayback.setOnAction {
-            when(playbackStatus){
-                PlaybackStatus.STOPPED -> {
-                    playbackStatus = PlaybackStatus.LOADING
+        if(song.fromServer) buttonContainer.children.remove(btnPlayback)
+        else btnPlayback.setOnAction {
+            when(uploadStatus){
+                UploadStatus.NOT_STARTED -> {
+                    uploadStatus = UploadStatus.UPLOADING
                     svgPlayback.content = SVGPaths.LOADING
                     thread(start = true){
-                        clip = AudioSystem.getClip()
+                        val audio = File(song.audioURL)
+                        val art = File(song.artURL)
+                        val easy = File(song.easyChartURL)
+                        val normal = File(song.normalChartURL)
+                        val hard = File(song.hardChartURL)
+                        val songInfo = File(audio.parent, "song.xml")
+
                         try {
-                            clip.open(AudioSystem.getAudioInputStream(URL(song.audioURL)))
+                            val song = Server.createSong(songInfo, art, audio, easy, normal, hard)
+                            val uploadInfo = UploadInfo(
+                                Server.url as String,
+                                song.id,
+                                song.uploader
+                            )
+                            File(audio.parent, "upload_info.json").writeText(Gson().toJson(uploadInfo))
+                            Platform.runLater {
+                                uploadStatus = UploadStatus.NOT_STARTED
+                                svgPlayback.content = SVGPaths.UPLOAD
+                                buttonContainer.children.remove(btnPlayback)
+                                Notifications.create()
+                                    .title("Upload complete")
+                                    .text("${song.songName} uploaded!")
+                                    .showInformation()
+                            }
                         }
                         catch (e: Exception){
                             e.printStackTrace()
-                            svgPlayback.content = SVGPaths.ERROR
-                            playbackStatus = PlaybackStatus.STOPPED
-                            return@thread
+                            Platform.runLater {
+                                uploadStatus = UploadStatus.NOT_STARTED
+                                svgPlayback.content = SVGPaths.UPLOAD
+                                Notifications.create()
+                                    .title("Upload failed")
+                                    .text("${song.songName} failed to upload")
+                                    .showInformation()
+                            }
                         }
-
-                        clip.start()
-                        playbackStatus = PlaybackStatus.PLAYING
-                        svgPlayback.content = SVGPaths.PAUSE
                     }
                 }
-                PlaybackStatus.PLAYING -> {
-                    clip.stop()
-                    playbackStatus = PlaybackStatus.STOPPED
-                    svgPlayback.content = SVGPaths.PLAY
-                }
-                PlaybackStatus.LOADING -> {}
+                else -> {}
             }
         }
 

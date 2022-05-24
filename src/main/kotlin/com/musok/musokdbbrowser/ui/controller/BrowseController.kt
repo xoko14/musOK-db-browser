@@ -13,6 +13,16 @@ class BrowseController: Initializable {
     @FXML lateinit var rootPane: FlowPane
 
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
+        populateView()
+    }
+
+    @FXML
+    fun update(){
+        populateView()
+    }
+
+    private fun populateView(){
+        rootPane.children.clear()
         val songs = Server.getAllSongs()
         for (song in songs){
             val songCard = SongCard(song)

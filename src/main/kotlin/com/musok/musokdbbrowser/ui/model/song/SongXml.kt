@@ -24,7 +24,7 @@ class SongXml {
     @field:Element
     var jacket: Jacket? = null
 
-    fun toSong(path: String): Song {
+    fun toSong(path: String): LocalSong {
         return LocalSong(
             songName = this.title ?: "null",
             author = this.artist ?: "null",
@@ -47,11 +47,11 @@ class SongXml {
             songArt = listOf(jacket?.file ?: "null", jacket?.artist ?: "null"),
             uploader = -1,
             id = -1,
-            artURL = ("file:///"+path + jacket?.file),
-            audioURL = ("file:///"+path + music?.file),
-            easyChartURL = ("file:///"+path + this.easy?.file),
-            normalChartURL = ("file:///"+path + this.normal?.file),
-            hardChartURL = ("file:///"+path + this.hard?.file),
+            artURL = (path + jacket?.file),
+            audioURL = (path + music?.file),
+            easyChartURL = (path + this.easy?.file),
+            normalChartURL = (path + this.normal?.file),
+            hardChartURL = (path + this.hard?.file),
         )
     }
 }
