@@ -5,12 +5,26 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="200.0" styleClass=".song-card" stylesheets="@../../../../../target/classes/theme/dark-theme.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="287.0" prefWidth="200.0" styleClass=".song-card" stylesheets="@../../../../../target/classes/theme/dark-theme.css" type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <ImageView fx:id="img" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+      <StackPane alignment="TOP_RIGHT" prefHeight="150.0" prefWidth="200.0">
+         <children>
+            <ImageView fx:id="img" fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+            <Pane maxHeight="30.0" maxWidth="30.0" minHeight="30.0" minWidth="30.0" prefHeight="30.0" prefWidth="30.0">
+               <children>
+                  <fx:include source="fav-button.fxml" VBox.vgrow="ALWAYS" />
+               </children>
+               <StackPane.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </StackPane.margin>
+            </Pane>
+         </children>
+      </StackPane>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="190.0">
          <children>
             <Label fx:id="lbName" text="Label" />

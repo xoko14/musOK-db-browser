@@ -16,6 +16,7 @@ $button-hover: #6a6a6a;
 $pressed-border-color: #289de8;
 $button-border-color: #8d57fc;
 $textfield-color: #40596c;
+$fav-color: #d32f2f;
 
 .root {
   -fx-background: $background-color;
@@ -32,6 +33,10 @@ $textfield-color: #40596c;
   SVGPath{
     -fx-fill: $text-color;
   }
+  .fav-button{
+    -fx-background-color: $fav-color;
+    -fx-border-color: $fav-color;
+  }
 }
 
 .button:hover, .buttonStop:hover, .buttonUp:hover, .choice-box:hover, .button:focused:hover, .buttonStop:focused:hover, .buttonUp:focused:hover, .buttonSelect:focused:hover, .choice-box:focused:hover {
@@ -40,11 +45,19 @@ $textfield-color: #40596c;
   -fx-border-radius: 3;
   -fx-border-width: 2;
   -fx-text-fill: $text-color;
+  .fav-button{
+    -fx-background-color: $fav-color;
+    -fx-border-color: $fav-color;
+  }
 }
 
 .button:focused, .buttonStop:focused, .buttonUp:focused, .buttonSelect:focused, .choice-box:focused {
   -fx-background-color: $button-hover;
   -fx-border-color: $button-hover;
+  .fav-button{
+    -fx-background-color: $fav-color;
+    -fx-border-color: $fav-color;
+  }
 }
 
 .button:pressed, .button:pressed:hover{
@@ -56,6 +69,11 @@ $textfield-color: #40596c;
 
   SVGPath{
     -fx-fill: $pressed-border-color;
+  }
+
+  .fav-button{
+    -fx-background-color: $fav-color;
+    -fx-border-color: $fav-color;
   }
 
 }
