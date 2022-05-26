@@ -52,6 +52,7 @@ class SongXml {
             easyChartURL = (path + this.easy?.file),
             normalChartURL = (path + this.normal?.file),
             hardChartURL = (path + this.hard?.file),
+            isFaved = null
         )
     }
 }
