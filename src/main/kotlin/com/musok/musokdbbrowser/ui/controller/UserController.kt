@@ -14,13 +14,19 @@ import java.net.URL
 import java.util.*
 
 class UserController: Initializable {
-    @FXML private lateinit var taUserInfo: TextArea
     private lateinit var user: User
     override fun initialize(p0: URL?, p1: ResourceBundle?) {
         user = Server.getCurrentUser()
 
-        println(user)
+    }
 
-        taUserInfo.text="$user\n${Server.getCurrentUserUploaded()}"
+    @FXML
+    fun updateAccount() {
+
+    }
+
+    @FXML
+    fun deleteAccount() {
+
     }
 }

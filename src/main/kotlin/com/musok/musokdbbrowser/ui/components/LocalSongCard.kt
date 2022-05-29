@@ -2,7 +2,6 @@ package com.musok.musokdbbrowser.ui.components
 
 import com.google.gson.Gson
 import com.musok.musokdbbrowser.api.connection.Server
-import com.musok.musokdbbrowser.api.exceptions.IncorrectMediaTypeException
 import com.musok.musokdbbrowser.ui.model.song.LocalSong
 import com.musok.musokdbbrowser.ui.model.song.upload.UploadInfo
 import com.musok.musokdbbrowser.ui.util.SVGPaths
@@ -27,8 +26,6 @@ import javafx.stage.Stage
 import org.controlsfx.control.Notifications
 import java.io.File
 import java.io.IOException
-import java.net.URL
-import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
 import kotlin.concurrent.thread
 
@@ -132,7 +129,7 @@ class LocalSongCard(val song: LocalSong): VBox() {
         }
     }
 
-    fun setOnDownload(action: EventHandler<ActionEvent>){
+    fun setOnDelete(action: EventHandler<ActionEvent>){
         btnDelete.onAction = action
     }
 }

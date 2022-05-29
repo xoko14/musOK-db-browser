@@ -43,7 +43,7 @@
                   <Insets bottom="10.0" />
                </VBox.margin>
             </VBox>
-            <VBox styleClass="settings-section">
+            <VBox styleClass="settings-section" visible="false">
                <children>
                   <Label text="%languageSettings">
                      <VBox.margin>

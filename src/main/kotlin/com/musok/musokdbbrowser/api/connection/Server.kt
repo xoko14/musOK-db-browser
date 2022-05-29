@@ -167,6 +167,7 @@ object Server {
     //<editor-fold desc="Songs">
     fun getAllSongs(skip: String = "0", limit: String = "100"): List<Song>{
         val response = Unirest.get("$url/songs/")
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .queryString("skip", skip)
             .queryString("limit", limit)
@@ -204,6 +205,7 @@ object Server {
 
     fun getSong(id: String): Song{
         val response = Unirest.get("$url/songs/$id")
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
 

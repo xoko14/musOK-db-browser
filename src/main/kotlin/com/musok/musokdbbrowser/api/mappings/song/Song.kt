@@ -13,7 +13,7 @@ open class Song(
     @SerializedName("song_art") open val songArt: List<String>,
     open val uploader: Long,
     open val id: Long,
-    @SerializedName("is_faved") open val isFaved: Boolean?
+    open val isFaved: Boolean?
 ){
     open val artURL: String get() = "${Server.url}/songs/$id/jacket"
     open val audioURL: String get() = "${Server.url}/songs/$id/audio"

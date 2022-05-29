@@ -45,6 +45,7 @@ class SongCard(val song: Song): VBox() {
     @FXML lateinit var btnPlayback: Button
     @FXML lateinit var svgPlayback: SVGPath
     @FXML lateinit var svgDownload: SVGPath
+    @FXML lateinit var favButton: FavButton
 
     private var playbackStatus: PlaybackStatus = PlaybackStatus.STOPPED
     private lateinit var clip: Clip
@@ -75,6 +76,18 @@ class SongCard(val song: Song): VBox() {
 
         lbName.text = song.songName
         lbAuthor.text = song.author
+
+        favButton.setFaved(song.isFaved ?: false)
+
+        favButton.setOnFaved {
+            val status = Server.favSong(song.id.toString())
+            println(status)
+        }
+
+        favButton.setOnUnfaved {
+            val status = Server.unfavSong(song.id.toString())
+            println(status)
+        }
 
         btnPlayback.setOnAction {
             when(playbackStatus){
