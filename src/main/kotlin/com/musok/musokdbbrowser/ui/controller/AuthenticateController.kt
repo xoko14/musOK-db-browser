@@ -6,6 +6,7 @@ import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.ui.alerts.InfoAlert
 import com.musok.musokdbbrowser.ui.alerts.LegalAlert
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -13,6 +14,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import org.mindrot.jbcrypt.BCrypt
+import java.util.ResourceBundle
 
 
 class AuthenticateController {
@@ -23,6 +25,8 @@ class AuthenticateController {
     @FXML private lateinit var pfPassword: PasswordField
     @FXML private lateinit var pfPassSu: PasswordField
     @FXML private lateinit var pfPassConfSu: PasswordField
+
+    private val res: ResourceBundle  = SettingsManager.getResources()
 
     @FXML
     fun onConnectAction(){
