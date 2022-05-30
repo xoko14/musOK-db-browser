@@ -162,6 +162,18 @@ object Server {
             else -> throw UnknownException()
         }
     }
+
+    fun deleteUser(){
+        val response = Unirest.delete("$url/users/me")
+            .header("Authorization", token?.getHeaderValue())
+            .asJson()
+
+        when(response.status) {
+            200 -> return
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
+    }
     //</editor-fold>
 
     //<editor-fold desc="Songs">
@@ -215,8 +227,6 @@ object Server {
             else -> throw UnknownException()
         }
     }
-
-    //TODO: GET SONG MEDIA
 
     fun favSong(id: String): SongStatus{
         val response = Unirest.put("$url/songs/$id/fav")
