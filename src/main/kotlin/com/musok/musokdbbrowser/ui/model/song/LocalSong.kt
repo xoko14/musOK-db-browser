@@ -19,4 +19,7 @@ class LocalSong(
     override val easyChartURL: String,
     override val normalChartURL: String,
     override val hardChartURL: String,
-): Song(songName, author, music, easyDiff, normalDiff, hardDiff, songArt, uploader, id)
+    override val isFaved: Boolean?
+): Song(songName, author, music, easyDiff, normalDiff, hardDiff, songArt, uploader, id, isFaved){
+    var fromServer: Boolean = false
+}

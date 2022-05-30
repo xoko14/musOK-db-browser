@@ -12,13 +12,13 @@
    <children>
       <HBox VBox.vgrow="ALWAYS">
          <children>
-            <TextField prefHeight="25.0" prefWidth="290.0" promptText="%songName">
+<!--            <TextField prefHeight="25.0" prefWidth="290.0" promptText="%songName">-->
+<!--               <HBox.margin>-->
+<!--                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />-->
+<!--               </HBox.margin></TextField>-->
+            <Button mnemonicParsing="false" text="%search" onAction="#update">
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </HBox.margin></TextField>
-            <Button mnemonicParsing="false" text="%search">
-               <HBox.margin>
-                  <Insets top="5.0" />
+                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </HBox.margin></Button>
          </children>
       </HBox>

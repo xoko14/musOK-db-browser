@@ -5,3 +5,9 @@ enum class PlaybackStatus {
     PLAYING,
     LOADING
 }
+
+enum class UploadStatus {
+    UPLOADING,
+    FAILED,
+    NOT_STARTED
+}

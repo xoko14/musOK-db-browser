@@ -12,7 +12,8 @@ open class Song(
     @SerializedName("hard_diff") open val hardDiff: List<String>,
     @SerializedName("song_art") open val songArt: List<String>,
     open val uploader: Long,
-    open val id: Long
+    open val id: Long,
+    open val isFaved: Boolean?
 ){
     open val artURL: String get() = "${Server.url}/songs/$id/jacket"
     open val audioURL: String get() = "${Server.url}/songs/$id/audio"

@@ -2,16 +2,14 @@ package com.musok.musokdbbrowser.api.connection
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.musok.musokdbbrowser.api.exceptions.IncorrectLoginException
-import com.musok.musokdbbrowser.api.exceptions.InternalServerErrorException
-import com.musok.musokdbbrowser.api.exceptions.UnknownException
-import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
+import com.musok.musokdbbrowser.api.exceptions.*
 import com.musok.musokdbbrowser.api.mappings.auth.Token
 import com.musok.musokdbbrowser.api.mappings.legal.Legal
 import com.musok.musokdbbrowser.api.mappings.song.Song
 import com.musok.musokdbbrowser.api.mappings.song.SongStatus
 import com.musok.musokdbbrowser.api.mappings.user.User
 import kong.unirest.Unirest
+import java.io.File
 
 object Server {
     var url: String? = null
@@ -164,11 +162,24 @@ object Server {
             else -> throw UnknownException()
         }
     }
+
+    fun deleteUser(){
+        val response = Unirest.delete("$url/users/me")
+            .header("Authorization", token?.getHeaderValue())
+            .asJson()
+
+        when(response.status) {
+            200 -> return
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
+    }
     //</editor-fold>
 
     //<editor-fold desc="Songs">
     fun getAllSongs(skip: String = "0", limit: String = "100"): List<Song>{
         val response = Unirest.get("$url/songs/")
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .queryString("skip", skip)
             .queryString("limit", limit)
@@ -183,12 +194,30 @@ object Server {
         }
     }
 
-    fun createSong(){
-        TODO()
+    fun createSong(songInfo: File, art: File, audio: File, easy: File, normal: File, hard: File): Song{
+        val response = Unirest.post("$url/songs/")
+            .header("accept", "application/json")
+            .header("Authorization", token?.getHeaderValue())
+            .field("audio", audio)
+            .field("art", art)
+            .field("song_info", songInfo)
+            .field("easy", easy)
+            .field("normal", normal)
+            .field("hard", hard)
+            .asJson()
+
+        when(response.status){
+            200 -> return Gson().fromJson(response.body.toString(), Song::class.java)
+            401 -> throw AuthFailedException()
+            415 -> throw IncorrectMediaTypeException()
+            500 -> throw InternalServerErrorException()
+            else -> throw UnknownException()
+        }
     }
 
     fun getSong(id: String): Song{
         val response = Unirest.get("$url/songs/$id")
+            .header("Authorization", token?.getHeaderValue())
             .header("accept", "application/json")
             .asJson()
 
@@ -198,8 +227,6 @@ object Server {
             else -> throw UnknownException()
         }
     }
-
-    //TODO: GET SONG MEDIA
 
     fun favSong(id: String): SongStatus{
         val response = Unirest.put("$url/songs/$id/fav")
