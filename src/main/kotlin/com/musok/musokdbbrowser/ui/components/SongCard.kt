@@ -31,6 +31,7 @@ import org.simpleframework.xml.core.Persister
 import java.io.File
 import java.io.IOException
 import java.net.URL
+import java.util.*
 import javax.sound.sampled.AudioSystem
 import javax.sound.sampled.Clip
 import kotlin.concurrent.thread
@@ -49,6 +50,8 @@ class SongCard(val song: Song): VBox() {
 
     private var playbackStatus: PlaybackStatus = PlaybackStatus.STOPPED
     private lateinit var clip: Clip
+
+    private var res: ResourceBundle = SettingsManager.getResources()
 
     init {
         val loader = FXMLLoader(javaClass.getResource("/views/components/song-card.fxml"))
@@ -201,8 +204,8 @@ class SongCard(val song: Song): VBox() {
                     btnDownload.onAction = thisaction
                     svgDownload.content = SVGPaths.DOWNLOAD
                     Notifications.create()
-                        .title("Download completed")
-                        .text("${song.songName} downloaded!")
+                        .title(res.getString("downloadCompleted"))
+                        .text(String.format(res.getString("downloadCompleted2"), song.songName))
                         .showInformation()
                 }
             }

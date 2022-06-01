@@ -36,13 +36,12 @@ class AuthenticateController {
         }
         catch (e: IncorrectLoginException){
             InfoAlert(
-                alertName = "Incorrect login",
-                alertDesc = "Username / password does not exist."
+                alertName = res.getString("incorrectLogin"),
+                alertDesc = res.getString("userNotExists")
             ).showAndWait()
             return
         }
         catch (e: UnknownException){
-            println("something went wrong")
             return
         }
 
@@ -73,31 +72,30 @@ class AuthenticateController {
                         )
                     } catch (e: UserAlreadyRegisteredException) {
                         InfoAlert(
-                            alertName = "User already registered",
-                            alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                            alertName = res.getString("userAlreadyRegistered"),
+                            alertDesc = String.format(res.getString("userAlreadyExists"), tfUserSu.text)
                         ).showAndWait()
                         return
                     } catch (e: UnknownException) {
-                        println("something went wrong")
                         return
                     }
 
                     InfoAlert(
-                        alertName = "Sign up successful",
-                        alertDesc = "User \n${tfUserSu.text}\n created successfully."
+                        alertName = res.getString("signupSucc"),
+                        alertDesc = String.format(res.getString("signupCreated"), tfUserSu.text)
                     ).showAndWait()
                 }
 
             } else {
                 InfoAlert(
-                    alertName = "Passwords don't match",
-                    alertDesc = "Please check that the passwords match."
+                    alertName = res.getString("passwdErr"),
+                    alertDesc = res.getString("checkPassMatch")
                 ).showAndWait()
             }
         } else {
             InfoAlert(
-                alertName = "Info cannot be empty",
-                alertDesc = "Please fill all the textboxes."
+                alertName = res.getString("infoNotEmpty"),
+                alertDesc = res.getString("fillFields")
             ).showAndWait()
         }
     }
