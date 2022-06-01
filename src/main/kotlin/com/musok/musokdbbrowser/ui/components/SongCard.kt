@@ -138,7 +138,8 @@ class SongCard(val song: Song): VBox() {
             btnDownload.setOnAction {  }
             thread(start = true) {
                 val folderName = "${song.id}_${song.songName.replace(' ', '-')}"
-                val chartsLocation = SettingsManager.settings?.chartsLocation?: "./charts"
+                val chartsLocation = File(SettingsManager.settings?.chartsLocation?.ifEmpty{null} ?: "charts/")
+                if (!chartsLocation.exists()) chartsLocation.mkdir()
                 val chartFolder = File(chartsLocation, folderName)
                 if (!chartFolder.exists()) chartFolder.mkdir()
 
