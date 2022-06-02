@@ -18,6 +18,7 @@ import java.nio.file.Path
 import java.nio.file.Paths
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.io.path.absolutePathString
 
 
 class LocalBrowseController: Initializable {
@@ -37,13 +38,13 @@ class LocalBrowseController: Initializable {
         rootPane.children.clear()
         songs.clear()
         try {
-            Files.walk(Paths.get(SettingsManager.settings?.chartsLocation ?: "")).use { walkStream ->
+            Files.walk(Paths.get(SettingsManager.settings?.chartsLocation?.ifEmpty{null} ?: "charts/")).use { walkStream ->
                 walkStream.filter { p: Path ->
                     p.toFile().isFile
                 }.forEach { f: Path ->
                     if (f.toString().endsWith("song.xml")) {
                         try {
-                            val song = Persister().read(SongXml::class.java, f.toFile()).toSong(f.toString().replace("song.xml", ""))
+                            val song = Persister().read(SongXml::class.java, f.toFile()).toSong(f.absolutePathString().replace("song.xml", ""))
                             if(File(f.parent.toString(), "upload_info.json").exists()) song.fromServer = true
                             songs.add(song)
                         }

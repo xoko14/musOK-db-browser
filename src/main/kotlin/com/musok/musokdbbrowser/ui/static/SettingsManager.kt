@@ -5,6 +5,7 @@ import com.musok.musokdbbrowser.ui.model.settings.Settings
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
+import java.util.*
 
 object SettingsManager {
     var settings: Settings? = null
@@ -23,5 +24,9 @@ object SettingsManager {
         val fileWriter = FileWriter("./settings.json")
         fileWriter.write(Gson().toJson(settings))
         fileWriter.close()
+    }
+
+    fun getResources(): ResourceBundle{
+        return ResourceBundle.getBundle("bundles/strings", Locale.getDefault())
     }
 }

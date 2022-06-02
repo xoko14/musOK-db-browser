@@ -6,6 +6,7 @@ import com.musok.musokdbbrowser.api.exceptions.UnknownException
 import com.musok.musokdbbrowser.api.exceptions.UserAlreadyRegisteredException
 import com.musok.musokdbbrowser.ui.alerts.InfoAlert
 import com.musok.musokdbbrowser.ui.alerts.LegalAlert
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import javafx.fxml.FXML
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
@@ -13,6 +14,7 @@ import javafx.scene.control.PasswordField
 import javafx.scene.control.TextField
 import javafx.stage.Stage
 import org.mindrot.jbcrypt.BCrypt
+import java.util.ResourceBundle
 
 
 class AuthenticateController {
@@ -24,6 +26,8 @@ class AuthenticateController {
     @FXML private lateinit var pfPassSu: PasswordField
     @FXML private lateinit var pfPassConfSu: PasswordField
 
+    private val res: ResourceBundle  = SettingsManager.getResources()
+
     @FXML
     fun onConnectAction(){
         Server.url = tfURL.text.trim()
@@ -32,13 +36,12 @@ class AuthenticateController {
         }
         catch (e: IncorrectLoginException){
             InfoAlert(
-                alertName = "Incorrect login",
-                alertDesc = "Username / password does not exist."
+                alertName = res.getString("incorrectLogin"),
+                alertDesc = res.getString("userNotExists")
             ).showAndWait()
             return
         }
         catch (e: UnknownException){
-            println("something went wrong")
             return
         }
 
@@ -69,31 +72,30 @@ class AuthenticateController {
                         )
                     } catch (e: UserAlreadyRegisteredException) {
                         InfoAlert(
-                            alertName = "User already registered",
-                            alertDesc = "User with name \n${tfUserSu.text}\n already exists."
+                            alertName = res.getString("userAlreadyRegistered"),
+                            alertDesc = String.format(res.getString("userAlreadyExists"), tfUserSu.text)
                         ).showAndWait()
                         return
                     } catch (e: UnknownException) {
-                        println("something went wrong")
                         return
                     }
 
                     InfoAlert(
-                        alertName = "Sign up successful",
-                        alertDesc = "User \n${tfUserSu.text}\n created successfully."
+                        alertName = res.getString("signupSucc"),
+                        alertDesc = String.format(res.getString("signupCreated"), tfUserSu.text)
                     ).showAndWait()
                 }
 
             } else {
                 InfoAlert(
-                    alertName = "Passwords don't match",
-                    alertDesc = "Please check that the passwords match."
+                    alertName = res.getString("passwdErr"),
+                    alertDesc = res.getString("checkPassMatch")
                 ).showAndWait()
             }
         } else {
             InfoAlert(
-                alertName = "Info cannot be empty",
-                alertDesc = "Please fill all the textboxes."
+                alertName = res.getString("infoNotEmpty"),
+                alertDesc = res.getString("fillFields")
             ).showAndWait()
         }
     }

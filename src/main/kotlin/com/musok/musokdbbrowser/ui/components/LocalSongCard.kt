@@ -4,6 +4,7 @@ import com.google.gson.Gson
 import com.musok.musokdbbrowser.api.connection.Server
 import com.musok.musokdbbrowser.ui.model.song.LocalSong
 import com.musok.musokdbbrowser.ui.model.song.upload.UploadInfo
+import com.musok.musokdbbrowser.ui.static.SettingsManager
 import com.musok.musokdbbrowser.ui.util.SVGPaths
 import javafx.application.Platform
 import javafx.event.ActionEvent
@@ -26,6 +27,7 @@ import javafx.stage.Stage
 import org.controlsfx.control.Notifications
 import java.io.File
 import java.io.IOException
+import java.util.*
 import javax.sound.sampled.Clip
 import kotlin.concurrent.thread
 
@@ -42,6 +44,8 @@ class LocalSongCard(val song: LocalSong): VBox() {
 
     private var uploadStatus: UploadStatus = UploadStatus.NOT_STARTED
     private lateinit var clip: Clip
+
+    private var res: ResourceBundle = SettingsManager.getResources()
 
     init {
         val loader = FXMLLoader(javaClass.getResource("/views/components/localsong-card.fxml"))
@@ -97,8 +101,8 @@ class LocalSongCard(val song: LocalSong): VBox() {
                                 svgPlayback.content = SVGPaths.UPLOAD
                                 buttonContainer.children.remove(btnPlayback)
                                 Notifications.create()
-                                    .title("Upload complete")
-                                    .text("${song.songName} uploaded!")
+                                    .title(res.getString("uploadComplete"))
+                                    .text(String.format(res.getString("songUploaded"), song.songName))
                                     .showInformation()
                             }
                         }
@@ -108,8 +112,8 @@ class LocalSongCard(val song: LocalSong): VBox() {
                                 uploadStatus = UploadStatus.NOT_STARTED
                                 svgPlayback.content = SVGPaths.UPLOAD
                                 Notifications.create()
-                                    .title("Upload failed")
-                                    .text("${song.songName} failed to upload")
+                                    .title(res.getString("uploadFailed"))
+                                    .text(String.format(res.getString("uploadFailed2"), song.songName))
                                     .showInformation()
                             }
                         }
