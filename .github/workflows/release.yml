@@ -23,9 +23,8 @@ jobs:
       - name: Build with Maven
         run: mvn -B package --file pom.xml
         
-      - name: Find jar
-        id: find_jar
-        run: echo "::set-output name=output_jar::$(find target/ -iname musOK-db-browser-*.*.*-SNAPSHOT-jar-with-dependencies.jar)"
+      - name: Set env
+        run: echo "JAR_OUT=$(find target/ -iname musOK-db-browser-*.*.*-jar-with-dependencies.jar)" >> $GITHUB_ENV
         
       - name: Create Release
         id: create_release
@@ -45,7 +44,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-          asset_path: musOK-db-browser-0.2.1-SNAPSHOT-jar-with-dependencies.jar
+          asset_path: ${{ env.JAR_OUT }}
           asset_name: musOK-db-browser.jar
           asset_content_type: application/java-archive
           
