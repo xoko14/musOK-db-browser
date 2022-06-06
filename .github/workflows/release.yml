@@ -12,17 +12,21 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        
       - name: Set up JDK 17
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
           cache: maven
+          
       - name: Build with Maven
         run: mvn -B package --file pom.xml
+        
       - name: Find jar
         id: find_jar
         run: echo "::set-output name=output_jar::$(find target/ -iname musOK-db-browser-*.*.*-SNAPSHOT-jar-with-dependencies.jar)"
+        
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -33,6 +37,7 @@ jobs:
           release_name: Release ${{ github.ref }}
           draft: true
           prerelease: false
+          
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
@@ -41,6 +46,6 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ${{ steps.find_jar.outputs.output_jar }}
-          asset_name: musOK-db-browser_${{ github.ref }}.jar
+          asset_name: musOK-db-browser.jar
           asset_content_type: application/java-archive
           
